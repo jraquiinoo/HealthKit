@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+		<title>HealthKit</title>
+		
+		<!-- CSS  -->
+		<link href="assets/css/materialize.css" type="text/css" rel="stylesheet"
+			media="screen,projection" />
+		<link href="assets/css/style.css" type="text/css" rel="stylesheet"
+			media="screen,projection" />
+	</head>
+	<body>
+		<nav class="white">
+			<div class="nav-wrapper">
+				<a id="logo-container" href="index.html"
+					class="brand-logo left-align"> <img id="logo"
+					src="assets/images/Icon.png" style="margin-bottom: 6px;" /><span
+					id="brand-text">HealthKit</span>
+				</a>
+				<a href="#" data-activates="side-nav" class="button-collapse">
+					<i class="mdi-navigation-menu"></i>
+				</a>
+				<ul class="nav-icons hide-on-med-and-down">
+					<li class="icon-links white"><a href=""><img id="logo"
+							src="assets/images/help.png" style="width: 25px; margin-botom: 10px;" /></a></li>
+					<li class="page_item white"><a class="modal-trigger"
+						href="#login-modal"><span>Login</span></a></li>
+					<li class="page_item white"><a href="register.html"><span>Register</span></a></li>
+					<li class="page_item white"><a href=""><span>Contact Us</span></a></li>
+				</ul>
+				<ul class="side-nav" id="side-nav" style="overflow: auto;">
+					<li style="display: block; background-color: white; border-bottom: 1px solid #CCCCCC">
+						<a href="/HealthKit/index.html" style="padding: 25px 0; position:relative; top: 50%; left: 50%; transform:translate(-50%);">
+							<img style="height: 70px; height: 70px;" src="assets/images/Icon.png"/>
+						</a>
+					</li>
+					<li class="black-text white"><span style="font-weight: bold; text-transform: uppercase; font-size:0.85rem;">HealthKit</span></li>
+					<li><a href="/login">Log in</a></li>
+					<li><a href="/register">Register</a></li>
+					<li><a href="#">Help</a></li>
+					<li><a href="#">Contact Us</a></li>
+				</ul>
+			</div>
+		</nav>
+		<div class="teal accent-4 z-depth-1">
+			<div class="container valign-wrapper white-text">
+				<div class="section">
+					<div class="row">
+						<div class="col s6 m6 l6 offset-l1">
+							<div class="title">
+								<h1>What is HealthKit?</h1>
+							</div>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+							eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+							enim ad minim veniam, quis nostrud exercitation ullamco laboris
+							nisi ut aliquip ex ea commodo consequat.
+						</div>
+						<div class="col s4 m4 l4">
+							<img src="assets/images/CapitalH.png" class="responsive-img" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="section">
+				<div class="row">
+					<p class="red-text">Instructions: Please fill in the required
+						fields below.</p>
+					<form class="col s12">
+						<div class="row" style="margin:0;">
+							<div class="col s12 m5 valign-wrapper" style="height: 190px;">
+								<div class="waves-effect grey lighten-4 center-align" style="width: 150px; height: 150px; display: table; border: 1px solid #CCCCCC;">
+									<div style="display: table-cell; vertical-align:middle;">
+									<i class="medium grey-text text-lighten-2 mdi-social-person"></i>
+									</div>
+								</div>
+							</div>
+							<div class="col s12 m7">
+								<div class="row" style="margin:0;">
+									<div class="input-field col s12 m6">
+										<input id="first_name" type="text" class="validate"> 
+										<label for="first_name">First Name</label>
+									</div>
+									<div class="input-field col s12 m6">
+										<input id="last_name" type="text" class="validate"> 
+										<label for="last_name">Last Name</label>
+									</div>
+									<div class="input-field col s12">
+										<input id="username" type="text" class="validate"> <label
+											for="username">Username</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row" style="margin:0;">
+							<div class="col s12 m5">
+								<div class="row" style="margin-top:10px;padding-left:10px;">
+									<label class="col s12">Gender</label>
+									<div class="col s6 center-align">
+										<input class="with-gap" name="gender" type="radio" id="male" />
+										<label for="male">Male</label>
+									</div>
+									<div class="col s6 center-align">
+										<input class="with-gap" name="gender" type="radio" id="female" /> 
+										<label for="female">Female</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="mdi-social-cake prefix"></i> 
+										<input id="birthdate" type="date" class="datepicker"> 
+										<label for="birthdate">Birthdate</label>
+									</div>
+								</div>
+							</div>
+							<div class="col s12 m7">
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="mdi-communication-email prefix"></i> 
+										<input id="email" type="email" class="validate"> 
+										<label for="email">Email</label>
+									</div>
+									<div class="input-field col s12 l6">
+										<i class="mdi-action-lock-outline prefix"></i> 
+										<input id="password" type="password" class="validate"> 
+										<label for="password">Password</label>
+									</div>
+									<div class="input-field col s12 l6">
+										<i class="mdi-action-lock-outline prefix"></i> 
+										<input id="cpassword" type="password" class="validate"> 
+										<label for="cpassword">Confirm Password</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="divider row"></div>
+						<div class="row right-align">
+							<a class="waves-effect waves-light btn modal-trigger" href="#register-modal">
+								Register<i class="mdi-content-send right"></i>
+							</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div id="register-modal" class="modal">
+			<div class="modal-content">
+				<h4>Terms and Condition</h4>
+				<p>By clicking agree, you comply to the terms and conditions of
+					HealthKit.</p>
+			</div>
+			<div class="modal-footer">
+				<a href="index.html"
+					class="waves-effect waves-green btn-flat modal-action">Agree</a>
+			</div>
+		</div>
+		<footer class="page-footer teal accent-4">
+			<div class="container">
+				<div class="row">
+					<div class="col l6 s12">
+						<h5 class="white-text">Footer Content</h5>
+						<p class="grey-text text-lighten-4">You can use rows and
+							columns here to organize your footer content.</p>
+					</div>
+					<div class="col l4 offset-l2 s12">
+						<h5 class="white-text">Links</h5>
+						<ul>
+							<li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+							<li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+							<li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+							<li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="footer-copyright">
+				<div class="container">
+					© 2015 Copyright Text <a class="grey-text text-lighten-4 right"
+						href="#!">More Links</a>
+				</div>
+			</div>
+		</footer>
+		<script type="text/javascript" src="assets/js/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="assets/js/materialize.min.js"></script>
+		<script>
+		  $(document).ready(function(){
+		      $('.slider').slider({full_width: true});
+		      $('.datepicker').pickadate({
+		        selectMonths: false, 
+		        selectYears: 15 
+		      });
+		      $('.modal-trigger').leanModal();
+		      $('select').material_select();
+		      $(".button-collapse").sideNav({
+				  menuWidth: 300
+			  });
+		  });
+		</script>
+	</body>
+</html>

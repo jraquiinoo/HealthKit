@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+		<title>HealthKit</title>
+		
+		<!-- CSS  -->
+		<link href="assets/css/materialize.css" type="text/css" rel="stylesheet"
+			media="screen,projection" />
+		<link href="assets/css/style.css" type="text/css" rel="stylesheet"
+			media="screen,projection" />
+	</head>
+
+	<body class="loaded">
+		<nav class="white">
+			<div class="nav-wrapper">
+				<a id="logo-container" href="index.html"
+					class="brand-logo left-align"> <img id="logo"
+					src="assets/images/Icon.png" style="margin-bottom: 6px;" /><span
+					id="brand-text">HealthKit</span>
+				</a>
+				<a href="#" data-activates="side-nav" class="button-collapse">
+					<i class="mdi-navigation-menu"></i>
+				</a>
+				<ul class="nav-icons hide-on-med-and-down">
+					<li class="icon-links white"><a href=""><img id="logo"
+							src="assets/images/help.png" style="width: 25px; margin-botom: 10px;" /></a></li>
+					<li class="page_item white"><a class="modal-trigger"
+						href="#login-modal"><span>Login</span></a></li>
+					<li class="page_item white"><a href="register.html"><span>Register</span></a></li>
+					<li class="page_item white"><a href=""><span>Contact Us</span></a></li>
+				</ul>
+				<ul class="side-nav" id="side-nav" style="overflow: auto;">
+					<li style="display: block; background-color: white; border-bottom: 1px solid #CCCCCC">
+						<a href="/HealthKit/index.html" style="padding: 25px 0; position:relative; top: 50%; left: 50%; transform:translate(-50%);">
+							<img style="height: 70px; height: 70px;" src="assets/images/Icon.png"/>
+						</a>
+					</li>
+					<li class="black-text white"><span style="font-weight: bold; text-transform: uppercase; font-size:0.85rem;">HealthKit</span></li>
+					<li><a href="/login">Log in</a></li>
+					<li><a href="/register">Register</a></li>
+					<li><a href="#">Help</a></li>
+					<li><a href="#">Contact Us</a></li>
+					<li class="black-text white"><span style="font-weight: bold; text-transform: uppercase; font-size:0.85rem;">Events</span></li>
+					<li><a href="#!">Popular</a></li>
+	      			<li><a href="#!">Programs</a></li>
+				    <li><a href="#!">Sports</a></li>
+				    <li><a href="#!">Seminars</a></li>
+				    <li><a href="#!">Campaign</a></li>
+				    <li><a href="#!">Others</a></li>
+				</ul>
+			</div>
+		</nav>
+		<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+			<a class="btn-floating btn-large red modal-trigger" href="#addevent">
+				<i class="large mdi-editor-mode-edit"></i>
+			</a>
+		</div>
+	
+		<!-- Login Modal -->
+		<div id="login-modal" class="modal">
+			<div class="modal-content">
+				<h5>Log in</h5>
+				<div class="divider"></div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="username" type="text" class="validate"> <label
+							for="username">Username</label>
+					</div>
+	
+					<div class="input-field col s12">
+						<input id="password" type="text" class="validate"> <label
+							for="password">Password</label>
+					</div>
+	
+					<div class="col s12">
+						<form action="#">
+							<p>
+								<input type="checkbox" id="rememberme" /> <label
+									for="rememberme">Remember Me</label>
+							</p>
+						</form>
+					</div>
+	
+					<div class="divider"></div>
+				</div>
+	
+				<a href="#"
+					class="waves-effect waves-green btn modal-action modal-close right">Log
+					in</a>
+			</div>
+		</div>
+	
+		<!-- add event modal -->
+		<div id="addevent" class="modal">
+			<div class="modal-content">
+				<h5>Add Event</h5>
+				<div class="divider"></div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="username" type="text" class="validate"> <label
+							for="username">Event Name</label>
+					</div>
+	
+					<form class="col s12">
+						<label for="textarea1">Description</label>
+						<textarea id="textarea1" class="materialize-textarea"></textarea>
+					</form>
+	
+					<div class="input-field col s12">
+						<select>
+							<option value="" disabled selected>Choose your location</option>
+							<option value="1">Option 1</option>
+							<option value="2">Option 2</option>
+							<option value="3">Option 3</option>
+						</select>
+					</div>
+	
+					<div class="input-field col s12">
+						<form action="#">
+							<div class="file-field input-field">
+								<input class="file-path validate" type="text" />
+								<div class="btn">
+									<span>Add</span> <input type="file" />
+								</div>
+							</div>
+						</form>
+					</div>
+	
+					<div class="divider"></div>
+				</div>
+	
+				<a href="#"
+					class="waves-effect waves-green btn modal-action modal-close right">Add
+					Event</a>
+			</div>
+		</div>
+	
+		<div id="navbar" class="hide-on-med-and-down">
+			<div class="row">
+				<div class="col s12">
+					<ul class="tabs">
+						<li class="tab col s1"><a class="active" href="#test1"
+							onclick="fadeInImage('.fade1')">POPULAR</a></li>
+						<li class="tab col s1"><a href="#test2">PROGRAMS</a></li>
+						<li class="tab col s1"><a href="#test3">SPORTS</a></li>
+						<li class="tab col s1"><a href="#test4">SEMINARS</a></li>
+						<li class="tab col s1"><a href="#test5">CAMPAIGN</a></li>
+						<li class="tab col s1"><a href="#test6">OTHERS</a></li>
+						<li class="tab col s1"></li>
+						<li class="tab col s1"></li>
+						<li class="tab col s1"></li>
+						<li class="tab col s1"></li>
+						<li class="tab col s1"></li>
+						<li class="tab col s1"></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	
+		<div class="slider">
+			<ul class="slides">
+				<li><img
+					src="https://unsplash.imgix.net/photo-1414924347000-9823c338079b?q=75&fm=jpg&s=0fa6db3cdc65e50c111575043fad4b5c">
+					<!-- random image -->
+					<div class="caption left-align">
+						<h3>Lorem Ipsum</h3>
+						<p class="light grey-text text-lighten-3">Lorem ipsum dolor sit
+							amet, consectetur adipiscing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+							veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+							ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+							voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+							officia deserunt mollit anim id est laborum.</p>
+					</div></li>
+				<li><img
+					src="https://ununsplash.imgix.net/photo-1414849424631-8b18529a81ca?q=75&fm=jpg&s=0e993004a2f3704e8f2ad5469315ccb7">
+					<!-- random image -->
+					<div class="caption left-align">
+						<h3>Lorem Ipsum</h3>
+						<p class="light grey-text text-lighten-3">Lorem ipsum dolor sit
+							amet, consectetur adipiscing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+							veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+							ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+							voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+							officia deserunt mollit anim id est laborum.</p>
+					</div></li>
+				<li><img
+					src="https://ununsplash.imgix.net/uploads/1413259835094dcdeb9d3/6e609595?q=75&fm=jpg&s=6a4fc66161293fc4a43a6ca6f073d1c5">
+					<!-- random image -->
+					<div class="caption left-align">
+						<h3>Lorem Ipsum</h3>
+						<p class="light grey-text text-lighten-3">Lorem ipsum dolor sit
+							amet, consectetur adipiscing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+							veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+							ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+							voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+							officia deserunt mollit anim id est laborum.</p>
+					</div></li>
+			</ul>
+		</div>
+		<form class="col s12 m12 l12 white">
+			<div class="container">
+				<div class="row">
+					<div class="input-field col s6">
+						<i class="mdi-action-search prefix"></i> <input id="icon_prefix"
+							type="text" class="validate">
+					</div>
+				</div>
+			</div>
+		</form>
+		<div class="container">
+			<div class="row">
+				<div class="col s12 m6 l4">
+					<div class="card small">
+						<div class="card-image">
+							<img
+								src="https://ununsplash.imgix.net/uploads/1413259835094dcdeb9d3/6e609595?q=75&fm=jpg&s=6a4fc66161293fc4a43a6ca6f073d1c5">
+							<span class="card-title">Card Title</span>
+						</div>
+						<div class="card-content">
+							<p>I am a very simple card. I am good at containing small bits
+								of information.</p>
+						</div>
+						<div class="card-action">
+							<a href="#">This is a link</a> <a href='#'>This is a link</a>
+						</div>
+					</div>
+				</div>
+	
+				<div class="col s12 m6 l4">
+					<div class="card small">
+						<div class="card-image">
+							<img
+								src="https://ununsplash.imgix.net/uploads/1413259835094dcdeb9d3/6e609595?q=75&fm=jpg&s=6a4fc66161293fc4a43a6ca6f073d1c5">
+							<span class="card-title">Card Title</span>
+						</div>
+						<div class="card-content">
+							<p>I am a very simple card. I am good at containing small bits
+								of information.</p>
+						</div>
+						<div class="card-action">
+							<a href="#">This is a link</a> <a href='#'>This is a link</a>
+						</div>
+					</div>
+				</div>
+	
+				<div class="col s12 m6 l4">
+					<div class="card small">
+						<div class="card-image">
+							<img
+								src="https://ununsplash.imgix.net/uploads/1413259835094dcdeb9d3/6e609595?q=75&fm=jpg&s=6a4fc66161293fc4a43a6ca6f073d1c5">
+							<span class="card-title">Card Title</span>
+						</div>
+						<div class="card-content">
+							<p>I am a very simple card. I am good at containing small bits
+								of information.</p>
+						</div>
+						<div class="card-action">
+							<a href="#">This is a link</a> <a href='#'>This is a link</a>
+						</div>
+					</div>
+				</div>
+	
+				<div class="col s12 m6 l4">
+					<div class="card small">
+						<div class="card-image">
+							<img
+								src="https://ununsplash.imgix.net/uploads/1413259835094dcdeb9d3/6e609595?q=75&fm=jpg&s=6a4fc66161293fc4a43a6ca6f073d1c5">
+							<span class="card-title">Card Title</span>
+						</div>
+						<div class="card-content">
+							<p>I am a very simple card. I am good at containing small bits
+								of information.</p>
+						</div>
+						<div class="card-action">
+							<a href="#">This is a link</a> <a href='#'>This is a link</a>
+						</div>
+					</div>
+				</div>
+	
+				<div class="col s12 m6 l4">
+					<div class="card small">
+						<div class="card-image">
+							<img
+								src="https://ununsplash.imgix.net/uploads/1413259835094dcdeb9d3/6e609595?q=75&fm=jpg&s=6a4fc66161293fc4a43a6ca6f073d1c5">
+							<span class="card-title">Card Title</span>
+						</div>
+						<div class="card-content">
+							<p>I am a very simple card. I am good at containing small bits
+								of information.</p>
+						</div>
+						<div class="card-action">
+							<a href="#">This is a link</a> <a href='#'>This is a link</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<footer class="page-footer teal accent-4">
+			<div class="container">
+				<div class="row">
+					<div class="col l6 s12">
+						<h5 class="white-text">Footer Content</h5>
+						<p class="grey-text text-lighten-4">You can use rows and
+							columns here to organize your footer content.</p>
+					</div>
+					<div class="col l4 offset-l2 s12">
+						<h5 class="white-text">Links</h5>
+						<ul>
+							<li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+							<li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+							<li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+							<li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="footer-copyright">
+				<div class="container">
+					© 2015 Copyright Text <a class="grey-text text-lighten-4 right"
+						href="#!">More Links</a>
+				</div>
+			</div>
+		</footer>
+	
+		<script type="text/javascript" src="assets/js/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="assets/js/materialize.js"></script>
+		<script>
+		  $(document).ready(function(){
+		    $('.slider').slider({full_width: true});
+		  });
+		
+		  $('body').toggleClass('loaded');
+		
+		  $(document).ready(function() {
+		    $('select').material_select();
+		  });
+		
+		  $(document).ready(function(){
+		    $('.modal-trigger').leanModal();
+		  });
+		  $(".button-collapse").sideNav({
+			  menuWidth: 300
+		  });
+		</script>
+	</body>
+</html>
