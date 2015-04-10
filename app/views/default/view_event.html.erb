@@ -1,0 +1,115 @@
+<% content_for :title, @event[:title] %>
+<div class="z-depth-1" style="height: 400px; padding-top:64px; background-image: url('<%= @event[:photo] %>'); background-repeat: no-repeat; background-size: cover; background-attachment:fixed;"></div>
+
+<% if @user[:id] == @event[:host][:id] %>
+	<a id="action-edit" href="http://localhost:3000/event/edit?ei=<%= @event[:id] %>" class="waves-effect btn-floating btn-large grey lighten-3 tooltipped" data-tooltip="Edit event" data-position="left" style="position: absolute; right: 100px; top: 464px; transform: translateY(-50%);">
+	<i class="mdi-editor-mode-edit grey-text text-darken-2"></i>
+<% else %>
+	<a id="action-join" href="#" class="waves-effect btn-floating btn-large grey lighten-3 tooltipped" data-tooltip="Join event" data-position="left" style="position: absolute; right: 100px; top: 464px; transform: translateY(-50%);">
+	<i class="mdi-navigation-arrow-forward grey-text text-darken-2"></i>
+<% end %>
+</a>
+<div class="section">
+	<div class="container">
+		<div class="section">
+			<div class="row">
+				<div class="col s4 m3 l2">
+					<img class="responsive-img circle" src="<%= @event[:host][:photo] %>"  style="width: 125px; height: 125px;"/>
+				</div>
+				<div class="col s8 m9 l10" style="padding-top:20px;">
+					<h4 style="font-weight: bold;"><%= @event[:host][:name] %></h4>
+					<h5>@<%= @event[:host][:username] %></h5>
+				</div>
+			</div>
+		</div>
+		<div class="section">
+			<p style="font-weight: bold; text-transform:uppercase;">Event description</p>
+			<p><%= @event[:description] %></p>
+		</div>
+		<div class="section">
+			<p style="font-weight: bold; text-transform:uppercase;">Event details</p>
+			<div class="row">
+				<div class="col s6 l4">
+					<p><i class='mdi-action-today left' style="font-size: 3rem;"></i><%= @event[:date] %></p>
+				</div>
+				<div class="col s6 l4">
+					<p><i class='mdi-device-access-time left' style="font-size: 3rem;"></i><%= @event[:time] %></p>
+				</div>
+				<div class="col s6 l4">
+					<p>
+						<i class="mdi-maps-local-offer left" style="font-size: 3rem;"></i>
+						<%= @event[:category] %>
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12">
+					<p><i class='mdi-maps-place left'  style="font-size: 3rem;"></i><%= @event[:address] %></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<div class="container">
+		<p style="font-weight: bold; text-transform:uppercase;">Event location</p>
+	</div>
+	<div class="row z-depth-1" style="height: 500px;">
+		<div id="map-canvas" style="width:100%;height:100%;"></div>
+	</div>
+</div>
+<div class="section">
+	<div class="container">
+		<p style="font-weight: bold; text-transform:uppercase;">See who's going</p>
+	</div>
+	<div class="grey lighten-4">
+		<div class="container">
+			<div class="row" style="padding: 25px 0;">
+				<div class="col s4 m3 l2 offset-s1 offset-l1" style="margin-bottom: 10px;">
+					<img class="responsive-img circle" src="assets/images/avatar.jpg"/>
+				</div>
+				<div class="col s4 m3 l2 offset-s2 offset-l1" style="margin-bottom: 10px;">
+					<img class="responsive-img circle" src="assets/images/avatar.jpg"/>
+				</div>
+				<div class="col s4 m3 l2 offset-s1 offset-l1" style="margin-bottom: 10px;">
+					<img class="responsive-img circle" src="assets/images/avatar.jpg"/>
+				</div>
+				<div class="col s4 m3 l2 offset-s2 offset-l1" style="margin-bottom: 10px;">
+					<img class="responsive-img circle" src="assets/images/avatar.jpg"/>
+				</div>
+			</div>
+			<div class="row right-align">
+				<a href="#" class="btn">View all</a>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<script>
+$(document).ready(function(){
+    $('.modal-trigger').leanModal();
+    $('.collapsible').collapsible({
+	      accordion : false
+	    });
+    $("#action-join").click(function(){
+    	if($(this).hasClass("grey")){
+    		$(this).removeClass("grey lighten-3").addClass("green").find("i").removeClass("grey-text").addClass("white-text");
+    	} else $(this).removeClass("green").addClass("grey lighten-3").find("i").removeClass("white-text").addClass("grey-text");
+    });
+    $(".tooltipped").tooltip({
+    	delay: 50
+    });
+    var latlng = new google.maps.LatLng(<%= @event[:lat] %>, <%= @event[:lng] %>);
+    var mapOptions = {
+        zoom: 15,
+        center: latlng,
+        mapTypeId: 'roadmap'
+    }
+    var marker = new google.maps.Marker({
+        position: latlng,
+        title: "sample location"
+    });
+    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    marker.setMap(map);
+});
+</script>

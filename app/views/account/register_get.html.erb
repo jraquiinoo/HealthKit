@@ -1,0 +1,250 @@
+<% content_for :title, "Register" %>
+<!-- Login Modal -->
+<div id="login-modal" class="modal">
+	<div class="modal-content">
+		<h5>Log in</h5>
+		<div class="divider"></div>
+		<div class="row">
+			<div class="input-field col s12">
+				<input id="username" type="text" class="validate"> <label
+					for="username">Username</label>
+			</div>
+
+			<div class="input-field col s12">
+				<input id="password" type="text" class="validate"> <label
+					for="password">Password</label>
+			</div>
+
+			<div class="col s12">
+				<form action="#">
+					<p>
+						<input type="checkbox" id="rememberme" /> <label
+							for="rememberme">Remember Me</label>
+					</p>
+				</form>
+			</div>
+
+			<div class="divider"></div>
+		</div>
+
+		<a href="#"
+			class="waves-effect waves-green btn modal-action modal-close right">Log
+			in</a>
+	</div>
+</div>
+<div class="teal accent-4 z-depth-1">
+	<div class="container valign-wrapper white-text">
+		<div class="section">
+			<div class="row">
+				<div class="col s6 m6 l6 offset-l1">
+					<div class="title">
+						<h1>What is HealthKit?</h1>
+					</div>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+					eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+					enim ad minim veniam, quis nostrud exercitation ullamco laboris
+					nisi ut aliquip ex ea commodo consequat.
+				</div>
+				<div class="col s4 m4 l4">
+					<img src="<%= asset_path('CapitalH.png') %>" class="responsive-img" />
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="section">
+		<div class="row">
+			<p class="red-text">Instructions: Please fill in the required
+				fields below.</p>
+			<%= form_tag(register_path, id: "registration-form", class: "col s12") do %>
+				<input id="hidden-file-input" name="photo_file" type="file" class="no-display" accept="image/*"/>
+				<div class="row" style="margin:0;">
+					<div class="col s12 m5 valign-wrapper" style="height: 190px;">
+						<div id="profile-photo" class="waves-effect grey lighten-4 center-align" style="width: 150px; height: 150px; display: table; border: 1px solid #CCCCCC; position:relative; left: 50%;transform: translateX(-50%)">
+							<img id="picture" style="width: 100%; height: 100%;"/>
+							<div id="picture-placeholder" style="display: table-cell; vertical-align:middle;">
+								<i class="medium grey-text text-lighten-2 mdi-social-person"></i>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 m7">
+						<div class="row" style="margin:0;">
+							<div class="input-field col s12 m6">
+								<input id="first_name" name="first_name" type="text"> 
+								<label for="first_name">First Name</label>
+							</div>
+							<div class="input-field col s12 m6">
+								<input id="last_name" name="last_name" type="text"> 
+								<label for="last_name">Last Name</label>
+							</div>
+							<div class="input-field col s12">
+								<input id="username" name="username" type="text" > <label
+									for="username">Username</label>
+							</div>
+							<div class="input-field col s12">
+								<input id="email" name="email" type="email"> 
+								<label for="email">Email</label>
+							</div>
+							<div class="input-field col s12 l6">
+								<input id="opassword" name="opassword" type="password"> 
+								<label for="opassword">Password</label>
+							</div>
+							<div class="input-field col s12 l6">
+								<input id="cpassword" name="cpassword" type="password">
+								<label for="cpassword">Confirm Password</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="divider row"></div>
+				<div class="row">
+					<div class="col s12 m8">
+						<input id="terms-checkbox" name="terms_checkbox" type="checkbox"/>
+						<label for="terms-checkbox">I have read and agree with the <a class="modal-trigger" href="#register-modal">terms and conditions</a> of HealthKit</label>
+					</div>
+					<div class="col s12 m4 right-align">
+						<a id="submit" class="waves-effect waves-light btn">
+							Register<i class="mdi-content-send right"></i>
+						</a>
+					</div>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>
+<div id="register-modal" class="modal">
+	<div class="modal-content">
+		<h4>Terms and Condition</h4>
+		<p>HealthKit will not be liable for your stupidity</p>
+	</div>
+	<div class="modal-footer">
+		<a href="#"
+			class="waves-effect waves-green btn-flat modal-action modal-close">close</a>
+	</div>
+</div>
+<script>
+  $(document).ready(function(){
+      $('.slider').slider({full_width: true});
+      $('.datepicker').pickadate({
+        selectMonths: false, 
+        selectYears: 15 
+      });
+      $('.modal-trigger').leanModal();
+      $('select').material_select();
+      $(".button-collapse").sideNav({
+		  menuWidth: 300
+	  });
+	  $("#profile-photo").click(function(){
+	  	$("#hidden-file-input").click();
+	  });
+	  $("#submit").click(function(){
+	  	$("#registration-form").submit();
+	  });
+
+	  $("#registration-form").validate({
+			errorClass: "invalid",
+			validClass: "valid",
+			debug: true,
+			errorElement: "span",
+			rules:{
+				username: {
+					required: true,
+					minlength: 6
+				},
+				opassword: {
+					required: true,
+					minlength: 6
+				},
+				cpassword: {
+					required: true,
+					equalTo: "#opassword"
+				},
+				first_name: {
+					required: true
+				},
+				last_name: {
+					required: true
+				},
+				email: {
+					required: true,
+					email: true
+				}
+			},
+			messages: {
+				username: {
+					required: "You must provide a username",
+					minlength: "Your username must be at least 6 characters long"
+				},
+				opassword: {
+					required: "You must provide a password",
+					minlength: "Your password must be at least 6 characters long"
+				},
+				cpassword: {
+					required: "You must re-enter your password",
+					equalTo: "Passwords do not match"
+				},
+				first_name: {
+					required: "You must enter your first name"
+				},
+				last_name: {
+					required: "You must enter your last name"
+				},
+				email: {
+					required: "You must provide your email address",
+					email: "You must enter a valid email address"
+				}
+			},
+			submitHandler: function(form){
+				console.log($(form).serialize());
+				if($("#terms-checkbox").prop("checked")){
+					$.ajax({
+						url: $(form).attr("action"),
+						data: new FormData(form),
+						processData: false,
+						contentType: false,
+						dataType: "json",
+						type: "post",
+						success: function(data, textStatus, jqXHR){
+							if(data.status == 1){
+								for(var i = 0; i < data.errors.length; i++){
+									if(data.errors[i] == 1){
+										$("#email").addClass("invalid");
+										toast("The email address you provided is already registered", 5000, "red");
+									}
+									else {
+										$("#username").addClass("invalid");
+										toast("The username you provided is already taken", 5000, "red");
+									}
+								}
+							} else{
+								location.assign("<%= root_path %>");
+							}
+						},
+						error: function(jqXHR, textStatus, errorThrown){
+							console.log(textStatus);
+							toast("An unknown problem was encountered while trying to sign up", 5000, "orange");
+						},
+						complete: function(){
+						}
+					});
+				} else{
+					toast("You must accept the terms and conditions", 4000, "red");
+				}
+			}
+		});
+		$("#hidden-file-input").change(function(){
+			previewImage(this);
+		})
+  	});
+	function previewImage(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+            	$("#picture-placeholder").css("display", "none");
+                $('#picture').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

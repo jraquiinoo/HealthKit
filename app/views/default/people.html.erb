@@ -1,0 +1,142 @@
+<!-- Edit modal-->
+<div id="edit-modal" class="modal">
+	<div class="modal-content">
+		<h5>Edit Details</h5>
+		<div class="divider"></div>
+		<div class="row">
+			<div class="input-field col s12">
+				<input id="username" type="text" class="validate"> <label
+					for="username">Name</label>
+			</div>
+
+			<div class="input-field col s12">
+				<input id="password" type="text" class="validate"> <label
+					for="password">Description</label>
+			</div>
+			<div class="divider"></div>
+
+			<div class="col s12">
+				<div class="progress">
+					<div class="determinate" style="width: 70%"></div>
+				</div>
+			</div>
+		</div>
+		<a href="#"
+			class="waves-effect waves-dark amber darken-1 btn modal-action modal-close right">Apply</a>
+	</div>
+</div>
+<div class="section"></div>
+<div class="container">
+	<div class="row">
+		<div class="col s12 m12 l12">
+			<div class="card-panel" style="padding-left: 50px; padding-right: 50px;">
+				<div class="row">
+					<div class="col s12 m4 l3">
+						<img id="profile-avatar" src="<%= @person[:photo] %>" alt="" class="circle">
+					</div>
+					<div id="profile-name" class="col s12 m6 l9">
+						<h5 style="font-weight: bold;"><%= @person[:firstname] + " " + @person[:lastname] %></h5>
+						<span>@<%= @person[:username] %></span>
+					</div>
+				</div>
+				<% if @user[:id] == @person[:id] %>
+					<div class="row">
+						<div class="col s12">
+							<a
+								class="waves-effect waves-light btn modal-trigger right amber darken-1"
+								href="#edit-modal">Edit&nbsp;Profile<i
+								class="mdi-editor-mode-edit right"></i></a>
+						</div>
+					</div>
+				<% end %>
+				<div class="divider"></div>
+				<div class="section">
+					<div class="row">
+						<div class="col s12">
+							<ul class="tabs">
+								<li class="tab col s6"><a href="#test1">Created
+										Events</a></li>
+								<li class="tab col s6"><a class="active"
+									href="#test2">Joined Events</a></li>
+							</ul>
+						</div>
+						<div id="test1" class="col s12">
+							<ul class="collapsible" data-collapsible="accordion">
+								<li>
+									<div class="collapsible-header">
+										<i class="mdi-image-filter-drama"></i>Event Names
+									</div>
+									<div class="collapsible-body">
+										<p>Lorem ipsum dolor sit amet.</p>
+									</div>
+								</li>
+								<li>
+									<div class="collapsible-header">
+										<i class="mdi-maps-place"></i>Event Name
+									</div>
+									<div class="collapsible-body">
+										<p>Lorem ipsum dolor sit amet.</p>
+									</div>
+								</li>
+								<li>
+									<div class="collapsible-header">
+										<i class="mdi-social-whatshot"></i>Event Name
+									</div>
+									<div class="collapsible-body">
+										<p>Lorem ipsum dolor sit amet.</p>
+									</div>
+								</li>
+							</ul>
+
+						</div>
+						<div id="test2" class="col s12">
+							<ul class="collapsible" data-collapsible="accordion">
+								<li>
+									<div class="collapsible-header">
+										<i class="mdi-image-filter-drama"></i>Event Names
+									</div>
+									<div class="collapsible-body">
+										<p>Lorem ipsum dolor sit amet.</p>
+									</div>
+								</li>
+								<li>
+									<div class="collapsible-header">
+										<i class="mdi-maps-place"></i>Event Name
+									</div>
+									<div class="collapsible-body">
+										<p>Lorem ipsum dolor sit amet.</p>
+									</div>
+								</li>
+								<li>
+									<div class="collapsible-header">
+										<i class="mdi-social-whatshot"></i>Event Name
+									</div>
+									<div class="collapsible-body">
+										<p>Lorem ipsum dolor sit amet.</p>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col s8 m8 l8">
+		</div>
+
+		<div class="section"></div>
+		<div class="divider"></div>
+	</div>
+</div>
+<script>
+  $(document).ready(function(){
+    $('.modal-trigger').leanModal();
+  });
+
+  $(document).ready(function(){
+    $('.collapsible').collapsible({
+      accordion : false
+    });
+  });
+</script>

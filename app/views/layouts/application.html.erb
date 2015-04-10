@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HealthKit | <%= yield(:title) %></title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<nav class="white">
+		<div class="nav-wrapper">
+			<%= link_to root_path, id: "logo-container", class: "brand-logo" do %>
+				<%= image_tag("Icon.png", alt: "home", id: "logo") %>
+				<span id="brand-text"><%= yield(:title) %></span>
+			<% end %>
+			<a id="sidenav-collapse" href="#" data-activates="side-nav" class="button-collapse">
+				<i class="mdi-navigation-menu  teal-text text-accent-3"></i>
+			</a>
+			<ul class="nav-icons hide-on-med-and-down">
+				<% if @user.present? %>
+					<li style="padding-top: 15px; background-color: white;">
+						<%= link_to people_path(id: @user[:id]) do %>
+						<% if @user[:photo].present? %>
+							<%= image_tag(@user[:photo], alt: "my avatar", class: "circle", height: 60, width: 60) %>
+						<% end %>
+						<span class="grey-text text-darken-3" style="vertical-align: top; margin-left: 15px;"><%= @user[:firstname] + " " + @user[:lastname] %></span>
+						<% end %>
+					</li>
+					<li style="padding-top: 15px;">
+						<a id="account-dropdown-button" href="#" class="dropdown-button" data-activates="account-dropdown"><i class="mdi-navigation-more-vert"></i></a>
+						<ul id='account-dropdown' class='dropdown-content'>
+						    <li><a href="#!">Settings</a></li>
+						    <li><a href="#!" onclick="$('#logout-form').submit();">Log out</a></li>
+						</ul>
+					</li>
+					<%= form_tag(logout_path, id: "logout-form", class: "no-display") do %>
+					<% end %>
+				<% else %>
+					<li class="icon-links white">
+						<a href="">
+							<%= image_tag("help.png", style: "width: 25px; margin-botom: 10px;") %>
+						</a></li>
+					<li class="page_item white">
+						<a class="login-trigger modal-trigger" href="#login-modal">
+							<span>Login</span>
+						</a>
+					</li>
+					<li class="page_item white">
+						<a href="register.html">
+							<span>Register</span>
+						</a>
+					</li>
+					<li class="page_item white">
+						<a href="">
+							<span>Contact Us</span>
+						</a>
+					</li>
+				<% end %>
+			</ul>
+			<!-- Login Modal -->
+			<div id="login-modal" class="modal">
+				<div class="modal-content">
+					<h5 class="grey-text text-darken-3">Log in</h5>
+					<div class="divider"></div>
+					<%= form_tag(login_path, id: "login-form") do %>
+						<div class="row">
+							<div class="col s12">
+								<label for="username_login">Username or email</label>
+								<input id="username_login" name="username_login" class="grey-text text-darken-3" type="text"> 
+							</div>
+							<div class="col s12">
+								<label for="opassword_login">Password</label>
+								<input id="opassword_login" name="opassword_login" class="grey-text text-darken-3" type="password"> 
+							</div>
+						</div>
+						<a id="login-submit" href="#"
+							class="waves-effect waves-green btn modal-action right">Log
+							in</a>
+					<% end %>
+				</div>
+			</div>
+			<ul class="side-nav" id="side-nav" style="overflow: auto;">
+				<li style="display: block; background-color: white; border-bottom: 1px solid #CCCCCC">
+					<%= link_to root_path, style: "padding: 25px 0; position:relative; top: 50%; left: 50%; transform:translate(-50%);" do %>
+						<%= image_tag("Icon.png", style: "height: 70px; height: 70px;") %>
+					<% end %>
+				</li>
+				<li class="black-text white"><span style="font-weight: bold; text-transform: uppercase; font-size:0.85rem;">HealthKit</span></li>
+				<li><a href="#login-modal" class="login-trigger modal-trigger">Log in</a></li>
+				<li><%= link_to "Register", register_path %></li>
+				<li><a href="#">Help</a></li>
+				<li><a href="#">Contact Us</a></li>
+				<li class="black-text white"><span style="font-weight: bold; text-transform: uppercase; font-size:0.85rem;">Events</span></li>
+				<li><a href="#!">Popular</a></li>
+      			<li><a href="#!">Programs</a></li>
+			    <li><a href="#!">Sports</a></li>
+			    <li><a href="#!">Seminars</a></li>
+			    <li><a href="#!">Campaign</a></li>
+			    <li><a href="#!">Others</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div id="navbar" class="hide-on-med-and-down">
+		<div class="row">
+			<div class="col l6">
+				<ul>
+					<li class="col l2"><a class="teal-text text-accent-3" href="#test1">POPULAR</a></li>
+					<li class="col l2"><a class="teal-text text-accent-3" href="#test2">PROGRAMS</a></li>
+					<li class="col l2"><a class="teal-text text-accent-3" href="#test3">SPORTS</a></li>
+					<li class="col l2"><a class="teal-text text-accent-3" href="#test4">SEMINARS</a></li>
+					<li class="col l2"><a class="teal-text text-accent-3" href="#test5">CAMPAIGN</a></li>
+					<li class="col l2"><a class="teal-text text-accent-3" href="#test6">OTHERS</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+<%= yield %>
+<footer class="page-footer teal accent-4">
+	<div class="container">
+		<div class="row">
+			<div class="col l6 s12">
+				<h5 class="white-text">Footer Content</h5>
+				<p class="grey-text text-lighten-4">You can use rows and
+					columns here to organize your footer content.</p>
+			</div>
+			<div class="col l4 offset-l2 s12">
+				<h5 class="white-text">Links</h5>
+				<ul>
+					<li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+					<li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+					<li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+					<li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="footer-copyright">
+		<div class="container">
+			© 2015 Copyright Text <a class="grey-text text-lighten-4 right"
+				href="#!">More Links</a>
+		</div>
+	</div>
+</footer>
+<script>
+	$(document).ready(function(){
+		$("#sidenav-collapse").sideNav({
+			menuWidth: 300
+		});
+		$(".login-trigger").leanModal();
+		$('#account-dropdown-button').dropdown({
+		      constrain_width: false,
+		      hover: false,
+		      alignment: 'right',
+		      belowOrigin: true
+		    }
+		  );
+		$("#login-submit").click(function(){
+			$("#login-form").submit();
+		})
+		$("#login-form").validate({
+			errorClass: "invalid",
+			validClass: "valid",
+			debug: true,
+			errorElement: "span",
+			rules:{
+				opassword_login: "required",
+				username_login: "required"
+			},
+			messages: {
+				opassword_login: "You must enter your password",
+				username_login:  "You must enter your username or email address"
+			},
+			submitHandler: function(form){
+				$.ajax({
+					url: $(form).attr("action"),
+					data: $(form).serialize(),
+					dataType: "json",
+					type: "post",
+					success: function(data, textStatus, jqXHR){
+						if(data.status == 1){
+							$("#opassword_login").addClass("invalid");
+							$("#username_login").addClass("invalid");
+							toast("Invalid username or password", 5000, "red");
+						} else{
+							location.assign("<%= root_path %>");
+						}
+					},
+					error: function(jqXHR, textStatus, errorThrown){
+						console.log(textStatus);
+						toast("An unknown problem was encountered while trying to sign up", 5000, "orange");
+					},
+					complete: function(){
+					}
+				});
+			}
+		})
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+
+<% if @event[:id] == -1 %>
+	<% content_for :title, "Create event" %>	
+<% else %>
+	<% content_for :title, "Edit event" %>
+<% end %>
+<div id="picture" class="z-depth-1" style="height: 400px; padding-top:64px; background-image: url('<%= asset_path('background1.jpg') %>'); background-repeat: no-repeat; background-size: cover; background-attachment:fixed;">
+	<div class="container white-text">
+		<div class="section">
+			<div class="row right-align">
+				<a href="#" id="choose-photo" class="btn">Choose Photo</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<div class="container">
+		<%= form_tag(event_edit_path, method: "post", id: "event-form") do %>
+		<div class="section">
+			<div class="row">
+				<div class="col s4 m3 l2">
+					<img class="circle" src="<%= @user[:photo] %>" style="width: 125px; height: 125px;"/>
+				</div>
+				<div class="col s8 m9 l10" style="padding-top:20px;">
+					<h4 style="font-weight: bold;"><%= @user[:name] %></h4>
+					<h5>@<%= @user[:username] %></h5>
+				</div>
+			</div>
+		</div>
+		<div class="section">
+			<p style="font-weight: bold; text-transform:uppercase;">Event title</p>
+			<input id="event_title" name="event_title" type="text" placeholder="What should the event be called?" value="<%= @event[:title] %>"></input>
+			<p style="font-weight: bold; text-transform:uppercase;">Event description</p>
+			<textarea id="event_description" name="event_description" class="materialize-textarea" placeholder="Say something about the event.."><%= @event[:description] %></textarea>
+		</div>
+		<div class="section">
+			<p style="font-weight: bold; text-transform:uppercase;">Event details</p>
+			<div class="row">
+				<div class="input-field col s6 l4">
+					<i class="mdi-action-today prefix"></i> 
+					<input id="event_date" name="event_date" type="date" class="datepicker" value="<%= @event[:date] %>"> 
+				</div>
+				<div class="col s6 l4">
+					<div class="col s3 valign-wrapper input-field">
+						<div>
+						<i class="mdi-device-access-time small"></i>
+						</div>
+					</div>
+					<div class="col s3 input-field">
+						<input id="event_time_hour" name="event_time_hour" type="number" min="1" max="12" placeholder="Hour" value="<%= @event[:hour] %>"> 
+					</div>
+					<div class="col s3 input-field">
+						<input id="event_time_minute" name="event_time_minute" type="number" min="0" max="59" placeholder="Minute" value="<%= @event[:minute] %>"> 
+					</div>
+					<div class="col s3">
+						<select id="event_ampm" name="event_ampm" class="material_select">
+							<option value="1">AM</option>
+							<option value="2">PM</option>
+						</select>
+					</div>
+				</div>
+				<div class="col s1 valign-wrapper input-field">
+					<div>
+						<i class="mdi-maps-local-offer small"></i>
+					</div>
+				</div>
+				<div class="col s11 l3">
+					<select id="event_category" name="event_category" class="material_select">
+						<% @categories.each do |category| %>
+							<option value="<%= category[:id] %>"><%= category[:name] %></option>
+						<% end %>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<i class="mdi-maps-place prefix"></i> 
+					<input id="event_address" name="event_address" type="text" placeholder="Event address" value="<%= @event[:address] %>"> 
+				</div>
+			</div>
+		</div>
+		<input id="map_lat" name="map_lat" type="hidden" value="<%= @event[:lat] %>"/>
+		<input id="map_lng" name="map_lng" type="hidden" value="<%= @event[:lng] %>"/>
+		<input id="event_photo" name="event_photo" type="file" class="no-display" accept="image/*"/>
+		<input id="event_id" name="event_id" type="hidden" value="-1"/>
+		<input type="submit" class="no-display"/>
+		<% end %>
+	</div>
+</div>
+<div class="section">
+	<div class="container">
+		<p style="font-weight: bold; text-transform:uppercase;">Event location</p>
+	</div>
+	<div class="row z-depth-1" style="height: 500px;">
+		<div id="map-canvas" style="width:100%;height:100%;"></div>
+	</div>
+</div>
+<div class="container">
+	<div class="row right-align">
+		<a href="#" class="btn" onclick="$('#event-form').submit();">Post event <i class="mdi-navigation-check right"></i></a>
+	</div>	
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<script>
+var currentPoint;
+function placeMarker(location) {
+	if(typeof currentPoint !== "undefined")
+		currentPoint.setMap(null);
+	  var marker = new google.maps.Marker({
+	    position: location,
+	    map: map,
+	  });
+	  currentPoint = marker;
+	  $("#map_lat").val(location.lat())
+	  $("#map_lng").val(location.lng());
+}
+
+function previewImage(input) {
+    if (input.files && input.files[0]) {
+    	var reader = new FileReader();
+        reader.onload = function (e) {
+        	$('#picture').css('background-image', "url('" + e.target.result + "')");
+        }
+    	reader.readAsDataURL(input.files[0]);
+	}
+}
+
+$(document).ready(function(){
+
+	<% if @event[:id] > -1 %>
+		$("#event_id").val("<%= @event[:id] %>");
+		$("#picture").css("background-image", "url('<%= @event[:photo] %>')");
+		$("#event_ampm option:nth-child(<%= @event[:ampm] %>)").attr("selected", "true");
+		$("#event_category option:nth-child(<%= @event[:category] %>)").attr("selected", "true");
+	<% end %>
+
+	$("#choose-photo").click(function(){
+		$("#event_photo").click();
+	});
+	$("#event_photo").change(function(){
+		previewImage(this);
+	});
+    $('.modal-trigger').leanModal();
+    $('.collapsible').collapsible({
+	    accordion : false
+	});
+	$("#event_ampm, #event_category").material_select();
+    $("#action-join").click(function(){
+    	if($(this).hasClass("grey")){
+    		$(this).removeClass("grey lighten-3").addClass("green").find("i").removeClass("grey-text").addClass("white-text");
+    	} else $(this).removeClass("green").addClass("grey lighten-3").find("i").removeClass("white-text").addClass("grey-text");
+    });
+    $(".tooltipped").tooltip({
+    	delay: 50
+    });
+    var latlng = new google.maps.LatLng(14.5746745, 120.9890185);
+    var mapOptions = {
+        zoom: 15,
+        center: latlng,
+        mapTypeId: 'roadmap'
+    }
+    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    google.maps.event.addListener(map, 'click', function(event) {
+		  placeMarker(event.latLng);
+	});
+
+    if($("#map_lat").val() != -1){
+    	var eventLocation = new google.maps.LatLng($("#map_lat").val(), $("#map_lng").val());
+    	placeMarker(eventLocation);
+    	map.setCenter(eventLocation);
+    }
+	$("#event-form").validate({
+		errorClass: "invalid",
+		validClass: "valid",
+		debug: true,
+		errorElement: "span",
+		rules:{
+			event_title: "required",
+			event_time_hour: "required",
+			event_time_minute: "required",
+			event_date: "required",
+			event_address: "required"
+		},
+		messages: {
+			event_title: "You must provide a title for the event",
+			event_time_hour: "You must provide the hour for the event",
+			event_time_minute: "You must provide the minute for the event",
+			event_date: "You must provide the date for the event",
+			event_address: "You must provide the address for the event"
+		},
+		submitHandler: function(form){
+			console.log($(form).serialize());
+			$.ajax({
+				url: $(form).attr("action"),
+				data: new FormData(form),
+				processData: false,
+				contentType: false,
+				dataType: "json",
+				type: "post",
+				success: function(data, textStatus, jqXHR){
+					if(data.status == 0){
+						location.assign(data.redirectto);
+					}
+				},
+				error: function(jqXHR, textStatus, errorThrown){
+					console.log(textStatus);
+					toast("An unknown problem was encountered while trying to post the event", 5000, "orange");
+				},
+				complete: function(){
+				}
+			});
+		}
+	});
+});
+</script>

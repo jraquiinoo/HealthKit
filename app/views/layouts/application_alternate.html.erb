@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HealthKit | <%= yield(:title) %></title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="grey lighten-4">
+	<nav class="white" style=" overflow: hidden">
+		<div class="nav-wrapper">
+			<%= link_to root_path, id: "logo-container", class: "brand-logo" do %>
+				<%= image_tag("Icon.png", alt: "home", id: "logo") %>
+				<span id="brand-text"><%= yield(:title) %></span>
+			<% end %>
+			<a id="sidenav-collapse" href="#" data-activates="side-nav" class="button-collapse">
+				<i class="mdi-navigation-menu  teal-text text-accent-3"></i>
+			</a>
+			<ul class="nav-icons hide-on-med-and-down">
+				<% if @user.present? %>
+					<li style="background-color: white;">
+						<%= link_to people_path(id: @user[:id]) do %>
+						<% if @user[:photo].present? %>
+							<%= image_tag(@user[:photo], alt: "my avatar", class: "circle", height: 50, width: 50, style:"margin-top: 7px;") %>
+						<% end %>
+						<span class="grey-text text-darken-3" style="vertical-align: top; margin-left: 15px;"><%= @user[:firstname] + " " + @user[:lastname] %></span>
+						<% end %>
+					</li>
+					<li>
+						<a id="account-dropdown-button" href="#" class="dropdown-button" data-activates="account-dropdown"><i class="mdi-navigation-more-vert"></i></a>
+						<ul id='account-dropdown' class='dropdown-content'>
+						    <li><a href="#!">Settings</a></li>
+						    <li><a href="#!" onclick="$('#logout-form').submit();">Log out</a></li>
+						</ul>
+					</li>
+					<%= form_tag(logout_path, id: "logout-form", class: "no-display") do %>
+					<% end %>
+				<% else %>
+					<li class="icon-links white">
+						<a href="">
+							<%= image_tag("help.png", style: "width: 25px; margin-botom: 10px;") %>
+						</a></li>
+					<li class="page_item white">
+						<a class="modal-trigger" href="#login-modal">
+							<span>Login</span>
+						</a>
+					</li>
+					<li class="page_item white">
+						<a href="register.html">
+							<span>Register</span>
+						</a>
+					</li>
+					<li class="page_item white">
+						<a href="">
+							<span>Contact Us</span>
+						</a>
+					</li>
+				<% end %>
+			</ul>
+			<ul class="side-nav" id="side-nav" style="overflow: auto;">
+				<li style="display: block; background-color: white; border-bottom: 1px solid #CCCCCC">
+					<%= link_to root_path, style: "padding: 25px 0; position:relative; top: 50%; left: 50%; transform:translate(-50%);" do %>
+						<%= image_tag("Icon.png", style: "height: 70px; height: 70px;") %>
+					<% end %>
+				</li>
+				<li class="black-text white"><span style="font-weight: bold; text-transform: uppercase; font-size:0.85rem;">HealthKit</span></li>
+				<li><a href="/login">Log in</a></li>
+				<li><%= link_to "Register", register_path %></li>
+				<li><a href="#">Help</a></li>
+				<li><a href="#">Contact Us</a></li>
+				<li class="black-text white"><span style="font-weight: bold; text-transform: uppercase; font-size:0.85rem;">Events</span></li>
+				<li><a href="#!">Popular</a></li>
+      			<li><a href="#!">Programs</a></li>
+			    <li><a href="#!">Sports</a></li>
+			    <li><a href="#!">Seminars</a></li>
+			    <li><a href="#!">Campaign</a></li>
+			    <li><a href="#!">Others</a></li>
+			</ul>
+		</div>
+	</nav>
+<%= yield %>
+<footer class="page-footer teal accent-4">
+		<div class="container">
+			<div class="row">
+				<div class="col l6 s12">
+					<h5 class="white-text">Footer Content</h5>
+					<p class="grey-text text-lighten-4">You can use rows and
+						columns here to organize your footer content.</p>
+				</div>
+				<div class="col l4 offset-l2 s12">
+					<h5 class="white-text">Links</h5>
+					<ul>
+						<li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+						<li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+						<li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+						<li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="footer-copyright">
+			<div class="container">
+				© 2015 Copyright Text <a class="grey-text text-lighten-4 right"
+					href="#!">More Links</a>
+			</div>
+		</div>
+	</footer>
+<script>
+	$(document).ready(function(){
+		$("#sidenav-collapse").sideNav({
+			menuWidth: 300
+		});
+		$('#account-dropdown-button').dropdown({
+		      constrain_width: false,
+		      hover: false,
+		      alignment: 'right',
+		      belowOrigin: true
+		    }
+		  );
+	});
+</script>
+</body>
+</html>

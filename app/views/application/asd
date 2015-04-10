@@ -1,0 +1,297 @@
+
+<div  style="background-image: url('<%= asset_path('sports_web.jpg') %>'); background-size: cover; background-attachment: fixed; height: 350px; width: 100%;">
+	<div class="container">
+		<h1 style="font-size: 15rem; line-height: 350px; margin-top: 0; color: rgba(0,0,0,0.5);">Sports</h1>
+	</div>
+</div>
+<div class="container">
+	<div class="section">
+		<div class="card" style="background: rgba(255,255,255,0.97);">
+			<div class="row" style="margin-bottom: 0; border-right: 1px solid #ccc; border-left: 1px solid #ccc;">
+				<div class="col s12 l6" style="padding-left: 0px; padding-right: 0px;">
+					<ul id="sport-event-list" style="margin: 0; border-right: 1px solid #ccc">
+						<li class="row sport-event" style="padding-top: 20px;">
+							<div class="col l4">
+								<img src="http://lorempixel.com/580/250/nature/2" style="width: 100px; height: 100px; position: relative; left: 50%; transform: translateX(-50%);">
+							</div>
+							<div class="col l8">
+								<span style="font-size: 1.2rem;" class="sport-event-item blue-text text-lighten-1">7 Eleven Run 2015</span>
+							</div>
+						</li>
+						<li class="divider" style="margin: 20px 0px;"></li>
+						<li class="row sport-event">
+							<div class="col l4">
+								<img src="http://lorempixel.com/580/250/nature/4" style="width: 100px; height: 100px; position: relative; left: 50%; transform: translateX(-50%);">
+							</div>
+							<div class="col l8">
+								<span style="font-size: 1.2rem;" class="sport-event-item">Nat Geo Run</span>
+							</div>
+						</li>
+						<li class="divider" style="margin: 20px 0px;"></li>
+						<li class="row sport-event">
+							<div class="col l4">
+								<img src="http://lorempixel.com/580/250/nature/1" style="width: 100px; height: 100px; position: relative; left: 50%; transform: translateX(-50%);">
+							</div>
+							<div class="col l8">
+								<span style="font-size: 1.2rem;" class="sport-event-item">Milo football camp</span>
+							</div>
+						</li>
+						<li class="divider"></li>
+						<li class="right-align">
+							<a href="#" class="waves-effect btn-flat teal-text" style="width: 100%; height: 100%; margin: 0;">
+								See more sporting events
+								<i class="mdi-navigation-arrow-forward right"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col s12 l6">
+					<div id="active-event" class="section" style="padding-left: 20px; padding-right: 20px;">
+						<h3 id="sport-feature-title" style="margin: 0;">7 Eleven Run 2015</h3>
+						<p style="margin: 0; font-size: 1.2rem;" class="grey-text text-darken-2">by <span id="sport-feature-author">7/11 inc.</span></p>
+						<p id="sport-feature-description">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. In faucibus ex mauris, non dictum lorem porta vitae. Morbi ac eros vitae lorem varius rhoncus. Fusce eu ornare arcu. Pellentesque id auctor sapien, ut placerat mi. Donec tempor nulla risus, non elementum sapien mollis ut. Sed dignissim et purus et vulputate. Cras tempus dictum augue, sit amet laoreet ipsum. Pellentesque non lorem ligula. In accumsan, risus sit amet rhoncus efficitur, metus nunc bibendum leo, vitae tristique arcu lacus in lectus.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div  style="background-image: url('<%= asset_path('programs_web.jpg') %>'); background-size: cover; background-attachment: fixed; height: 350px; width: 100%;">
+	<div class="container">
+		<h1 style="font-size: 15rem; line-height: 350px; color: rgba(255,255,255,0.5);">Programs</h1>
+	</div>
+</div>
+<div class="container">
+	<div class="section">
+		<div class="card" style="background: rgba(255,255,255,0.97);">
+			<div class="row" style="margin-bottom: 0; border-right: 1px solid #ccc; border-left: 1px solid #ccc;">
+				<div class="col s12 l6" style="padding-left: 0px; padding-right: 0px;">
+					<ul id="sport-event-list" style="margin: 0; border-right: 1px solid #ccc">
+						<li class="row sport-event" style="padding-top: 20px;">
+							<div class="col l4">
+								<img src="http://lorempixel.com/580/250/nature/2" style="width: 100px; height: 100px; position: relative; left: 50%; transform: translateX(-50%);">
+							</div>
+							<div class="col l8">
+								<span style="font-size: 1.2rem;" class="sport-event-item blue-text text-lighten-1">7 Eleven Run 2015</span>
+							</div>
+						</li>
+						<li class="divider" style="margin: 20px 0px;"></li>
+						<li class="row sport-event">
+							<div class="col l4">
+								<img src="http://lorempixel.com/580/250/nature/4" style="width: 100px; height: 100px; position: relative; left: 50%; transform: translateX(-50%);">
+							</div>
+							<div class="col l8">
+								<span style="font-size: 1.2rem;" class="sport-event-item">Nat Geo Run</span>
+							</div>
+						</li>
+						<li class="divider" style="margin: 20px 0px;"></li>
+						<li class="row sport-event">
+							<div class="col l4">
+								<img src="http://lorempixel.com/580/250/nature/1" style="width: 100px; height: 100px; position: relative; left: 50%; transform: translateX(-50%);">
+							</div>
+							<div class="col l8">
+								<span style="font-size: 1.2rem;" class="sport-event-item">Milo football camp</span>
+							</div>
+						</li>
+						<li class="divider"></li>
+						<li class="right-align">
+							<a href="#" class="waves-effect btn-flat teal-text" style="width: 100%; height: 100%; margin: 0;">
+								See more sporting events
+								<i class="mdi-navigation-arrow-forward right"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col s12 l6">
+					<div id="active-event" class="section" style="padding-left: 20px; padding-right: 20px;">
+						<h3 id="sport-feature-title" style="margin: 0;">7 Eleven Run 2015</h3>
+						<p style="margin: 0; font-size: 1.2rem;" class="grey-text text-darken-2">by <span id="sport-feature-author">7/11 inc.</span></p>
+						<p id="sport-feature-description">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. In faucibus ex mauris, non dictum lorem porta vitae. Morbi ac eros vitae lorem varius rhoncus. Fusce eu ornare arcu. Pellentesque id auctor sapien, ut placerat mi. Donec tempor nulla risus, non elementum sapien mollis ut. Sed dignissim et purus et vulputate. Cras tempus dictum augue, sit amet laoreet ipsum. Pellentesque non lorem ligula. In accumsan, risus sit amet rhoncus efficitur, metus nunc bibendum leo, vitae tristique arcu lacus in lectus.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div  style="background-image: url('<%= asset_path('seminar_web.jpg') %>'); background-size: cover; background-attachment: fixed; height: 350px; width: 100%;">
+	<div class="container">
+		<h1 style="font-size: 15rem; line-height: 350px; color: rgba(255,255,255,0.5);">Seminars</h1>
+	</div>
+</div>
+<div class="container">
+	<div class="section">
+		<div class="card" style="background: rgba(255,255,255,0.97);">
+			<div class="row" style="margin-bottom: 0; border-right: 1px solid #ccc; border-left: 1px solid #ccc;">
+				<div class="col s12 l6" style="padding-left: 0px; padding-right: 0px;">
+					<ul id="sport-event-list" style="margin: 0; border-right: 1px solid #ccc">
+						<li class="row sport-event" style="padding-top: 20px;">
+							<div class="col l4">
+								<img src="http://lorempixel.com/580/250/nature/2" style="width: 100px; height: 100px; position: relative; left: 50%; transform: translateX(-50%);">
+							</div>
+							<div class="col l8">
+								<span style="font-size: 1.2rem;" class="sport-event-item blue-text text-lighten-1">7 Eleven Run 2015</span>
+							</div>
+						</li>
+						<li class="divider" style="margin: 20px 0px;"></li>
+						<li class="row sport-event">
+							<div class="col l4">
+								<img src="http://lorempixel.com/580/250/nature/4" style="width: 100px; height: 100px; position: relative; left: 50%; transform: translateX(-50%);">
+							</div>
+							<div class="col l8">
+								<span style="font-size: 1.2rem;" class="sport-event-item">Nat Geo Run</span>
+							</div>
+						</li>
+						<li class="divider" style="margin: 20px 0px;"></li>
+						<li class="row sport-event">
+							<div class="col l4">
+								<img src="http://lorempixel.com/580/250/nature/1" style="width: 100px; height: 100px; position: relative; left: 50%; transform: translateX(-50%);">
+							</div>
+							<div class="col l8">
+								<span style="font-size: 1.2rem;" class="sport-event-item">Milo football camp</span>
+							</div>
+						</li>
+						<li class="divider"></li>
+						<li class="right-align">
+							<a href="#" class="waves-effect btn-flat teal-text" style="width: 100%; height: 100%; margin: 0;">
+								See more sporting events
+								<i class="mdi-navigation-arrow-forward right"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col s12 l6">
+					<div id="active-event" class="section" style="padding-left: 20px; padding-right: 20px;">
+						<h3 id="sport-feature-title" style="margin: 0;">7 Eleven Run 2015</h3>
+						<p style="margin: 0; font-size: 1.2rem;" class="grey-text text-darken-2">by <span id="sport-feature-author">7/11 inc.</span></p>
+						<p id="sport-feature-description">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. In faucibus ex mauris, non dictum lorem porta vitae. Morbi ac eros vitae lorem varius rhoncus. Fusce eu ornare arcu. Pellentesque id auctor sapien, ut placerat mi. Donec tempor nulla risus, non elementum sapien mollis ut. Sed dignissim et purus et vulputate. Cras tempus dictum augue, sit amet laoreet ipsum. Pellentesque non lorem ligula. In accumsan, risus sit amet rhoncus efficitur, metus nunc bibendum leo, vitae tristique arcu lacus in lectus.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div  style="background-image: url('<%= asset_path('campaign_web.jpg') %>'); background-size: cover; background-attachment: fixed; height: 350px; width: 100%;">
+	<div class="container">
+		<h1 style="font-size: 12rem; line-height: 350px; color: rgba(0,0,0,0.5);">Campaigns</h1>
+	</div>
+</div>
+<div class="container">
+	<div class="section">
+		<div class="card" style="background: rgba(255,255,255,0.97);">
+			<div class="row" style="margin-bottom: 0; border-right: 1px solid #ccc; border-left: 1px solid #ccc;">
+				<div class="col s12 l6" style="padding-left: 0px; padding-right: 0px;">
+					<ul id="sport-event-list" style="margin: 0; border-right: 1px solid #ccc">
+						<li class="row sport-event" style="padding-top: 20px;">
+							<div class="col l4">
+								<img src="http://lorempixel.com/580/250/nature/2" style="width: 100px; height: 100px; position: relative; left: 50%; transform: translateX(-50%);">
+							</div>
+							<div class="col l8">
+								<span style="font-size: 1.2rem;" class="sport-event-item blue-text text-lighten-1">7 Eleven Run 2015</span>
+							</div>
+						</li>
+						<li class="divider" style="margin: 20px 0px;"></li>
+						<li class="row sport-event">
+							<div class="col l4">
+								<img src="http://lorempixel.com/580/250/nature/4" style="width: 100px; height: 100px; position: relative; left: 50%; transform: translateX(-50%);">
+							</div>
+							<div class="col l8">
+								<span style="font-size: 1.2rem;" class="sport-event-item">Nat Geo Run</span>
+							</div>
+						</li>
+						<li class="divider" style="margin: 20px 0px;"></li>
+						<li class="row sport-event">
+							<div class="col l4">
+								<img src="http://lorempixel.com/580/250/nature/1" style="width: 100px; height: 100px; position: relative; left: 50%; transform: translateX(-50%);">
+							</div>
+							<div class="col l8">
+								<span style="font-size: 1.2rem;" class="sport-event-item">Milo football camp</span>
+							</div>
+						</li>
+						<li class="divider"></li>
+						<li class="right-align">
+							<a href="#" class="waves-effect btn-flat teal-text" style="width: 100%; height: 100%; margin: 0;">
+								See more sporting events
+								<i class="mdi-navigation-arrow-forward right"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col s12 l6">
+					<div id="active-event" class="section" style="padding-left: 20px; padding-right: 20px;">
+						<h3 id="sport-feature-title" style="margin: 0;">7 Eleven Run 2015</h3>
+						<p style="margin: 0; font-size: 1.2rem;" class="grey-text text-darken-2">by <span id="sport-feature-author">7/11 inc.</span></p>
+						<p id="sport-feature-description">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. In faucibus ex mauris, non dictum lorem porta vitae. Morbi ac eros vitae lorem varius rhoncus. Fusce eu ornare arcu. Pellentesque id auctor sapien, ut placerat mi. Donec tempor nulla risus, non elementum sapien mollis ut. Sed dignissim et purus et vulputate. Cras tempus dictum augue, sit amet laoreet ipsum. Pellentesque non lorem ligula. In accumsan, risus sit amet rhoncus efficitur, metus nunc bibendum leo, vitae tristique arcu lacus in lectus.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div  style="background-image: url('<%= asset_path('others_web.jpg') %>'); background-size: cover; background-attachment: fixed; height: 350px; width: 100%;">
+	<div class="container">
+		<h1 style="font-size: 12rem; line-height: 350px; color: rgba(0,0,0,0.5);">Others</h1>
+	</div>
+</div>
+<div class="container">
+	<div class="section">
+		<div class="card" style="background: rgba(255,255,255,0.97);">
+			<div class="row" style="margin-bottom: 0; border-right: 1px solid #ccc; border-left: 1px solid #ccc;">
+				<div class="col s12 l6" style="padding-left: 0px; padding-right: 0px;">
+					<ul id="sport-event-list" style="margin: 0; border-right: 1px solid #ccc">
+						<li class="row sport-event" style="padding-top: 20px;">
+							<div class="col l4">
+								<img src="http://lorempixel.com/580/250/nature/2" style="width: 100px; height: 100px; position: relative; left: 50%; transform: translateX(-50%);">
+							</div>
+							<div class="col l8">
+								<span style="font-size: 1.2rem;" class="sport-event-item blue-text text-lighten-1">7 Eleven Run 2015</span>
+							</div>
+						</li>
+						<li class="divider" style="margin: 20px 0px;"></li>
+						<li class="row sport-event">
+							<div class="col l4">
+								<img src="http://lorempixel.com/580/250/nature/4" style="width: 100px; height: 100px; position: relative; left: 50%; transform: translateX(-50%);">
+							</div>
+							<div class="col l8">
+								<span style="font-size: 1.2rem;" class="sport-event-item">Nat Geo Run</span>
+							</div>
+						</li>
+						<li class="divider" style="margin: 20px 0px;"></li>
+						<li class="row sport-event">
+							<div class="col l4">
+								<img src="http://lorempixel.com/580/250/nature/1" style="width: 100px; height: 100px; position: relative; left: 50%; transform: translateX(-50%);">
+							</div>
+							<div class="col l8">
+								<span style="font-size: 1.2rem;" class="sport-event-item">Milo football camp</span>
+							</div>
+						</li>
+						<li class="divider"></li>
+						<li class="right-align">
+							<a href="#" class="waves-effect btn-flat teal-text" style="width: 100%; height: 100%; margin: 0;">
+								See more sporting events
+								<i class="mdi-navigation-arrow-forward right"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col s12 l6">
+					<div id="active-event" class="section" style="padding-left: 20px; padding-right: 20px;">
+						<h3 id="sport-feature-title" style="margin: 0;">7 Eleven Run 2015</h3>
+						<p style="margin: 0; font-size: 1.2rem;" class="grey-text text-darken-2">by <span id="sport-feature-author">7/11 inc.</span></p>
+						<p id="sport-feature-description">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. In faucibus ex mauris, non dictum lorem porta vitae. Morbi ac eros vitae lorem varius rhoncus. Fusce eu ornare arcu. Pellentesque id auctor sapien, ut placerat mi. Donec tempor nulla risus, non elementum sapien mollis ut. Sed dignissim et purus et vulputate. Cras tempus dictum augue, sit amet laoreet ipsum. Pellentesque non lorem ligula. In accumsan, risus sit amet rhoncus efficitur, metus nunc bibendum leo, vitae tristique arcu lacus in lectus.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
