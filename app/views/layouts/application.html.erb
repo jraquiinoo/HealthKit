@@ -29,31 +29,19 @@
 					<li style="padding-top: 15px;">
 						<a id="account-dropdown-button" href="#" class="dropdown-button" data-activates="account-dropdown"><i class="mdi-navigation-more-vert"></i></a>
 						<ul id='account-dropdown' class='dropdown-content'>
-						    <li><a href="#!">Settings</a></li>
 						    <li><a href="#!" onclick="$('#logout-form').submit();">Log out</a></li>
 						</ul>
 					</li>
 					<%= form_tag(logout_path, id: "logout-form", class: "no-display") do %>
 					<% end %>
 				<% else %>
-					<li class="icon-links white">
-						<a href="">
-							<%= image_tag("help.png", style: "width: 25px; margin-botom: 10px;") %>
-						</a></li>
 					<li class="page_item white">
 						<a class="login-trigger modal-trigger" href="#login-modal">
 							<span>Login</span>
 						</a>
 					</li>
 					<li class="page_item white">
-						<a href="register.html">
-							<span>Register</span>
-						</a>
-					</li>
-					<li class="page_item white">
-						<a href="">
-							<span>Contact Us</span>
-						</a>
+						<%= link_to "Register", register_path %>
 					</li>
 				<% end %>
 			</ul>
@@ -91,12 +79,9 @@
 				<li><a href="#">Help</a></li>
 				<li><a href="#">Contact Us</a></li>
 				<li class="black-text white"><span style="font-weight: bold; text-transform: uppercase; font-size:0.85rem;">Events</span></li>
-				<li><a href="#!">Popular</a></li>
-      			<li><a href="#!">Programs</a></li>
-			    <li><a href="#!">Sports</a></li>
-			    <li><a href="#!">Seminars</a></li>
-			    <li><a href="#!">Campaign</a></li>
-			    <li><a href="#!">Others</a></li>
+				<%= @categories.each do |category| %>
+					<li><a href="<%= category[:link] %>"><%= category[:name] %></a></li>
+				<% end %>
 			</ul>
 		</div>
 	</nav>
@@ -104,12 +89,10 @@
 		<div class="row">
 			<div class="col l6">
 				<ul>
-					<li class="col l2"><a class="teal-text text-accent-3" href="#test1">POPULAR</a></li>
-					<li class="col l2"><a class="teal-text text-accent-3" href="#test2">PROGRAMS</a></li>
-					<li class="col l2"><a class="teal-text text-accent-3" href="#test3">SPORTS</a></li>
-					<li class="col l2"><a class="teal-text text-accent-3" href="#test4">SEMINARS</a></li>
-					<li class="col l2"><a class="teal-text text-accent-3" href="#test5">CAMPAIGN</a></li>
-					<li class="col l2"><a class="teal-text text-accent-3" href="#test6">OTHERS</a></li>
+					<% @categories.each do |category| %>
+						<li class="col l2"><a style="text-transform: uppercase" class="teal-text text-accent-3" href="<%= category[:link] %>"><%= category[:name] %></a>
+						</li>
+					<% end %>
 				</ul>
 			</div>
 		</div>
@@ -119,25 +102,22 @@
 	<div class="container">
 		<div class="row">
 			<div class="col l6 s12">
-				<h5 class="white-text">Footer Content</h5>
-				<p class="grey-text text-lighten-4">You can use rows and
-					columns here to organize your footer content.</p>
+				<h5 class="white-text">HealthKit</h5>
+				<p class="grey-text text-lighten-4">Lance Alcabasa - BEST PROF EVER</p>
 			</div>
 			<div class="col l4 offset-l2 s12">
-				<h5 class="white-text">Links</h5>
+				<h5 class="white-text">Developers</h5>
 				<ul>
-					<li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-					<li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-					<li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-					<li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+					<li><a class="grey-text text-lighten-3" href="#!">Andrea Ver</a></li>
+					<li><a class="grey-text text-lighten-3" href="#!">Ken Asanion</a></li>
+					<li><a class="grey-text text-lighten-3" href="#!">Jr Aquino</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
 	<div class="footer-copyright">
 		<div class="container">
-			© 2015 Copyright Text <a class="grey-text text-lighten-4 right"
-				href="#!">More Links</a>
+			© 2015 Copyright Text
 		</div>
 	</div>
 </footer>

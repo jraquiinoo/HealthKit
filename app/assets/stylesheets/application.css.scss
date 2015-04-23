@@ -277,3 +277,28 @@ span.invalid{
 .slider ul.indicators li.indicator-item.active{
   background-color: #009688;
 }
+
+#attendees-list li:not(li:nth-child(even)){
+  padding: 15px 20px;
+}
+
+#attendees-list li img{
+  width: 70px;
+  height: 70px;
+}
+
+#attendees-list li:nth-child(even){
+  margin: 15px 0;
+}
+
+#attendees-list li p{
+  display: inline; 
+  vertical-align: top; 
+  line-height: 70px; 
+  font-size: 1.2rem; 
+  margin-left: 20px;
+}
+
+.hidden{
+  display: none;
+}

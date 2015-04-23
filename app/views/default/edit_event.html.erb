@@ -4,7 +4,7 @@
 <% else %>
 	<% content_for :title, "Edit event" %>
 <% end %>
-<div id="picture" class="z-depth-1" style="height: 400px; padding-top:64px; background-image: url('<%= asset_path('background1.jpg') %>'); background-repeat: no-repeat; background-size: cover; background-attachment:fixed;">
+<div id="picture" class="z-depth-1" style="height: 400px; padding-top:64px; background-image: url('<%= @event[:photo] %>'); background-repeat: no-repeat; background-size: cover; background-attachment:fixed;">
 	<div class="container white-text">
 		<div class="section">
 			<div class="row right-align">
@@ -153,22 +153,25 @@ $(document).ready(function(){
     $(".tooltipped").tooltip({
     	delay: 50
     });
-    var latlng = new google.maps.LatLng(14.5746745, 120.9890185);
-    var mapOptions = {
-        zoom: 15,
-        center: latlng,
-        mapTypeId: 'roadmap'
-    }
-    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    google.maps.event.addListener(map, 'click', function(event) {
-		  placeMarker(event.latLng);
-	});
+    if(google.maps){
+    	var latlng = new google.maps.LatLng(14.5746745, 120.9890185);
+	    var mapOptions = {
+	        zoom: 15,
+	        center: latlng,
+	        mapTypeId: 'roadmap'
+	    }
+	    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+	    google.maps.event.addListener(map, 'click', function(event) {
+			  placeMarker(event.latLng);
+		});
 
-    if($("#map_lat").val() != -1){
-    	var eventLocation = new google.maps.LatLng($("#map_lat").val(), $("#map_lng").val());
-    	placeMarker(eventLocation);
-    	map.setCenter(eventLocation);
-    }
+	    if($("#map_lat").val() != -1){
+	    	var eventLocation = new google.maps.LatLng($("#map_lat").val(), $("#map_lng").val());
+	    	placeMarker(eventLocation);
+	    	map.setCenter(eventLocation);
+	    }
+    } else alert("Google maps failed to load successfully");
+
 	$("#event-form").validate({
 		errorClass: "invalid",
 		validClass: "valid",
@@ -189,7 +192,6 @@ $(document).ready(function(){
 			event_address: "You must provide the address for the event"
 		},
 		submitHandler: function(form){
-			console.log($(form).serialize());
 			$.ajax({
 				url: $(form).attr("action"),
 				data: new FormData(form),
@@ -203,7 +205,6 @@ $(document).ready(function(){
 					}
 				},
 				error: function(jqXHR, textStatus, errorThrown){
-					console.log(textStatus);
 					toast("An unknown problem was encountered while trying to post the event", 5000, "orange");
 				},
 				complete: function(){

@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :category
+	has_many :users, through: :event_attendee
 	def self.create_event(user_id, title, description, date, time, address, lat, lng, photo, event_ampm, category)
 		event = Event.create(user_id: user_id, title: title, description: description, 
 			edate: date, etime: time, address: address, 
@@ -32,9 +33,10 @@ class Event < ActiveRecord::Base
 				unless File.directory?(directory)
 				  FileUtils.mkdir_p(directory)
 				end
-
-				if File.exists?("public/" + event.photo)
-					File.delete("public/" + event.photo)
+				if event.photo.present?
+					if File.exists?("public/" + event.photo)
+						File.delete("public/" + event.photo)
+					end
 				end
 			    path = File.join(directory, filename)
 			    File.open(path, "w+b") { |f| f.write(photo.read) }

@@ -1,30 +1,7 @@
-<!-- Edit modal-->
-<div id="edit-modal" class="modal">
-	<div class="modal-content">
-		<h5>Edit Details</h5>
-		<div class="divider"></div>
-		<div class="row">
-			<div class="input-field col s12">
-				<input id="username" type="text" class="validate"> <label
-					for="username">Name</label>
-			</div>
-
-			<div class="input-field col s12">
-				<input id="password" type="text" class="validate"> <label
-					for="password">Description</label>
-			</div>
-			<div class="divider"></div>
-
-			<div class="col s12">
-				<div class="progress">
-					<div class="determinate" style="width: 70%"></div>
-				</div>
-			</div>
-		</div>
-		<a href="#"
-			class="waves-effect waves-dark amber darken-1 btn modal-action modal-close right">Apply</a>
-	</div>
-</div>
+<%= content_for :title, @person[:firstname] + " " + @person[:lastname] %>
+<%= form_tag(change_photo_path, method: "post", id: "photo-form", class: "hidden", multipart: true) do %>
+	<input id='photo' type='file' name='photo_file' accept="image/*"/>
+<% end %>
 <div class="section"></div>
 <div class="container">
 	<div class="row">
@@ -39,12 +16,10 @@
 						<span>@<%= @person[:username] %></span>
 					</div>
 				</div>
-				<% if @user[:id] == @person[:id] %>
+				<% if @user.present? && @user[:id] == @person[:id] %>
 					<div class="row">
 						<div class="col s12">
-							<a
-								class="waves-effect waves-light btn modal-trigger right amber darken-1"
-								href="#edit-modal">Edit&nbsp;Profile<i
+							<a class="waves-effect waves-light btn right amber darken-1" onclick='$("#photo").click();'>Change photo<i
 								class="mdi-editor-mode-edit right"></i></a>
 						</div>
 					</div>
@@ -61,61 +36,49 @@
 							</ul>
 						</div>
 						<div id="test1" class="col s12">
-							<ul class="collapsible" data-collapsible="accordion">
-								<li>
-									<div class="collapsible-header">
-										<i class="mdi-image-filter-drama"></i>Event Names
-									</div>
-									<div class="collapsible-body">
-										<p>Lorem ipsum dolor sit amet.</p>
-									</div>
-								</li>
-								<li>
-									<div class="collapsible-header">
-										<i class="mdi-maps-place"></i>Event Name
-									</div>
-									<div class="collapsible-body">
-										<p>Lorem ipsum dolor sit amet.</p>
-									</div>
-								</li>
-								<li>
-									<div class="collapsible-header">
-										<i class="mdi-social-whatshot"></i>Event Name
-									</div>
-									<div class="collapsible-body">
-										<p>Lorem ipsum dolor sit amet.</p>
-									</div>
-								</li>
-							</ul>
-
+							<% if @created.present? && @created.size > 0 %>
+								<ul>
+									<% @created.each_with_index do |event, event_index| %>
+										<li style="padding-top: 20px;">
+											<div class='row'>
+											<div class="col l2">
+												<div style="width: 100px; height: 100px; position: relative; left: 50%; transform: translateX(-50%); background-image: url('<%= event[:photo] %>'); background-size: cover;"></div>
+											</div>
+											<div class="col l10">
+												<a href='<%= event[:link] %>' class='blue-text' target='_blank' style="text-transform: none; font-size: 1.2rem;"><%= event[:title] %></a>
+												<p class="grey-text text-lighten-1" style='margin:0;'><%= event[:date] %></p>
+											</div>
+										</div>
+										</li>
+										<li class="divider" style="<% if event_index != @created.size - 1 %> margin: 20px 0px; <% end %>"></li>
+									<% end %>
+								</ul>
+							<% else %>
+								<p>There are no created events yet</p>
+							<% end %>
 						</div>
 						<div id="test2" class="col s12">
-							<ul class="collapsible" data-collapsible="accordion">
-								<li>
-									<div class="collapsible-header">
-										<i class="mdi-image-filter-drama"></i>Event Names
-									</div>
-									<div class="collapsible-body">
-										<p>Lorem ipsum dolor sit amet.</p>
-									</div>
-								</li>
-								<li>
-									<div class="collapsible-header">
-										<i class="mdi-maps-place"></i>Event Name
-									</div>
-									<div class="collapsible-body">
-										<p>Lorem ipsum dolor sit amet.</p>
-									</div>
-								</li>
-								<li>
-									<div class="collapsible-header">
-										<i class="mdi-social-whatshot"></i>Event Name
-									</div>
-									<div class="collapsible-body">
-										<p>Lorem ipsum dolor sit amet.</p>
-									</div>
-								</li>
-							</ul>
+							<% if @joined.present? && @joined.size > 0 %>
+								<ul>
+									<% @joined.each_with_index do |event, event_index| %>
+										<li style="padding-top: 20px;">
+											<div class='row'>
+											<div class="col l2">
+												<div style="width: 100px; height: 100px; position: relative; left: 50%; transform: translateX(-50%); background-image: url('<%= event[:photo] %>'); background-size: cover;"></div>
+											</div>
+											<div class="col l10">
+												<a href='<%= event[:link] %>' class='blue-text' target='_blank' style="text-transform: none; font-size: 1.2rem;"><%= event[:title] %></a>
+												<p class='grey-text text-darken-1'>by <a href='<%= event[:author_link] %>' style='text-transform: none; padding-top: 0;'><%= event[:author] %></a></p>
+												<p class="grey-text text-lighten-1" style='margin:0;'><%= event[:date] %></p>
+											</div>
+										</div>
+										</li>
+										<li class="divider" style="<% if event_index != @joined.size - 1 %> margin: 20px 0px; <% end %>"></li>
+									<% end %>
+								</ul>
+							<% else %>
+								<p>There are no joined events yet</p>
+							<% end %>
 						</div>
 					</div>
 				</div>
@@ -138,5 +101,8 @@
     $('.collapsible').collapsible({
       accordion : false
     });
+  });
+  $("#photo").change(function(e){
+  	$("#photo-form").submit();
   });
 </script>

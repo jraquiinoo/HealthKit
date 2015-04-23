@@ -16,6 +16,13 @@ Rails.application.routes.draw do
   post 'event/edit' => 'default#save_event'
 
   get 'event/view' => 'default#view_event'
+
+  get 'event/category' => 'default#view_category'
+
+  post 'event/join' => 'default#join_event'
+  post 'event/leave' => 'default#leave_event'
+  get 'event/attendees' => 'default#get_attendees'
+  post 'change_photo' => 'account#change_photo'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

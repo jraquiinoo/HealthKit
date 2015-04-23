@@ -31,4 +31,9 @@ class AccountController < ApplicationController
 			render :json => { status: 1 }
 		end
 	end
+
+	def change_photo
+		User.change_photo(session[:user_id], params[:photo_file])
+		redirect_to :back
+	end
 end

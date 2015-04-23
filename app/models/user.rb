@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
 	has_many :events
+	has_many :events, through: :event_attendee
 	def self.create_user(email, username, firstname, lastname, password, photo)
 		errors = []
 		if User.where(email: email).to_a.length > 0
@@ -43,6 +44,21 @@ class User < ActiveRecord::Base
 			user
 		else
 			nil
+		end
+	end
+
+	def self.change_photo(user_id, photo)
+		user = User.where(id: user_id).first
+		if user.present? && photo.present?
+			directory = "public/data/user/" + user_id.to_s()
+			filename = photo.original_filename
+			require 'fileutils'
+			unless File.directory?(directory)
+			  FileUtils.mkdir_p(directory)
+			end
+		    path = File.join(directory, filename)
+		    File.open(path, "w+b") { |f| f.write(photo.read) }
+		    User.update(user_id, :photo => "data/user/" + user_id.to_s() + "/" + filename)
 		end
 	end
 end

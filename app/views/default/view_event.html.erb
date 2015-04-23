@@ -1,14 +1,23 @@
 <% content_for :title, @event[:title] %>
 <div class="z-depth-1" style="height: 400px; padding-top:64px; background-image: url('<%= @event[:photo] %>'); background-repeat: no-repeat; background-size: cover; background-attachment:fixed;"></div>
 
-<% if @user[:id] == @event[:host][:id] %>
-	<a id="action-edit" href="http://localhost:3000/event/edit?ei=<%= @event[:id] %>" class="waves-effect btn-floating btn-large grey lighten-3 tooltipped" data-tooltip="Edit event" data-position="left" style="position: absolute; right: 100px; top: 464px; transform: translateY(-50%);">
-	<i class="mdi-editor-mode-edit grey-text text-darken-2"></i>
-<% else %>
-	<a id="action-join" href="#" class="waves-effect btn-floating btn-large grey lighten-3 tooltipped" data-tooltip="Join event" data-position="left" style="position: absolute; right: 100px; top: 464px; transform: translateY(-50%);">
-	<i class="mdi-navigation-arrow-forward grey-text text-darken-2"></i>
+<% if @user.present? %>
+	<% if @user[:id] == @event[:host][:id] %>
+		<a id="action-edit" href="/event/edit?ei=<%= @event[:id] %>" class="waves-effect btn-floating btn-large grey lighten-3 tooltipped" data-tooltip="Edit event" data-position="left" style="position: absolute; right: 100px; top: 464px; transform: translateY(-50%);">
+			<i class="mdi-editor-mode-edit grey-text text-darken-2"></i>
+		</a>
+	<% else %>
+		<% if @event[:joining] %>
+			<a id="action-join" href="#" class="waves-effect btn-floating btn-large green tooltipped" data-tooltip="Leave event" data-position="left" style="position: absolute; right: 100px; top: 464px; transform: translateY(-50%);">
+				<i class="mdi-navigation-arrow-forward white-text"></i>
+			</a>
+		<% else %>
+			<a id="action-join" href="#" class="waves-effect btn-floating btn-large grey lighten-3 tooltipped" data-tooltip="Join event" data-position="left" style="position: absolute; right: 100px; top: 464px; transform: translateY(-50%);">
+				<i class="mdi-navigation-arrow-forward grey-text text-darken-2"></i>
+			</a>
+		<% end %>
+	<% end %>
 <% end %>
-</a>
 <div class="section">
 	<div class="container">
 		<div class="section">
@@ -58,58 +67,240 @@
 		<div id="map-canvas" style="width:100%;height:100%;"></div>
 	</div>
 </div>
-<div class="section">
-	<div class="container">
-		<p style="font-weight: bold; text-transform:uppercase;">See who's going</p>
-	</div>
-	<div class="grey lighten-4">
+<% if @attendees.size > 0 %>
+	<div class="section">
 		<div class="container">
-			<div class="row" style="padding: 25px 0;">
-				<div class="col s4 m3 l2 offset-s1 offset-l1" style="margin-bottom: 10px;">
-					<img class="responsive-img circle" src="assets/images/avatar.jpg"/>
+			<p style="font-weight: bold; text-transform:uppercase;">See who's going</p>
+		</div>
+		<div class="grey lighten-4">
+			<div class="container">
+				<div class="row" style="padding: 25px 0;">
+					<% @attendees.each do |attendee| %>
+						<div class="col s4 m3 l2 offset-s1 offset-l1" style="margin-bottom: 10px;">
+							<a target="_blank" href="<%= attendee[:link] %>">
+								<img class="circle" src="<%= attendee[:photo] %>" style='width: 100px; height: 100px;'/>
+							</a>
+						</div>
+					<% end %>
 				</div>
-				<div class="col s4 m3 l2 offset-s2 offset-l1" style="margin-bottom: 10px;">
-					<img class="responsive-img circle" src="assets/images/avatar.jpg"/>
+				<div class="row right-align">
+					<a id="attendee-trigger" class="btn modal-trigger" href="#attendee-modal">View all</a>
 				</div>
-				<div class="col s4 m3 l2 offset-s1 offset-l1" style="margin-bottom: 10px;">
-					<img class="responsive-img circle" src="assets/images/avatar.jpg"/>
-				</div>
-				<div class="col s4 m3 l2 offset-s2 offset-l1" style="margin-bottom: 10px;">
-					<img class="responsive-img circle" src="assets/images/avatar.jpg"/>
-				</div>
-			</div>
-			<div class="row right-align">
-				<a href="#" class="btn">View all</a>
 			</div>
 		</div>
+	</div>
+<% end %>
+<!-- attendee Modal -->
+<div id="attendee-modal" class="modal">
+	<div class="modal-content">
+		<h5 class="grey-text text-darken-3">Attendees</h5>
+		<div class="divider" style="margin-bottom: 25px;"></div>
+		<div id="attendee-progressbar" class="preloader-wrapper active hidden" style="position: relative;">
+		    <div class="spinner-layer spinner-blue-only">
+		      	<div class="circle-clipper left">
+		        	<div class="circle"></div>
+		      	</div>
+		      	<div class="gap-patch">
+		        	<div class="circle"></div>
+		      	</div><div class="circle-clipper right">
+		        	<div class="circle"></div>
+		      	</div>
+		    </div>
+		</div>
+		<ul id="attendees-list"></ul>
 	</div>
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 <script>
 $(document).ready(function(){
+	$("#attendee-progressbar").css("left", parseInt($("#attendee-modal").css("width").replace("px","")) / 2 - parseInt($("#attendee-progressbar").css("width").replace("px","")));
     $('.modal-trigger').leanModal();
+    $("#attendee-trigger").leanModal({
+    	ready: function(){
+    		$("#attendees-list").empty();
+    		$("#attendee-progressbar").removeClass("hidden");	
+    		$.ajax({
+    			url: "/event/attendees",
+    			type: "get",
+    			data: "event_id=" + <%= @event[:id] %>,
+    			dataType: "json",
+    			success: function(data){
+    				$("#attendee-progressbar").addClass("hidden");
+    				if(data.status == 0){
+    					var attendees = data.attendees;
+    					for(var i = 0; i < attendees.length; i++){
+    						$("#attendees-list").append(
+    							$("<li><a target='_blank' href='/people?id=" + attendees[i].id + "'>" + 
+    								"<img src='" + attendees[i].photo + "' class='circle'/>" +
+    								"<p>" + attendees[i].name + "</p>" +
+    								"</a></li>")
+    						);
+    						if(i + 1 < attendees.length){
+    							$("#attendees-list").append($("<li class='divider'></li>"));
+    						}
+    					}
+    				} else{
+
+    				}
+    			},
+    			error: function(){
+
+    			}
+    		});
+    	}
+    });
     $('.collapsible').collapsible({
 	      accordion : false
 	    });
     $("#action-join").click(function(){
     	if($(this).hasClass("grey")){
-    		$(this).removeClass("grey lighten-3").addClass("green").find("i").removeClass("grey-text").addClass("white-text");
-    	} else $(this).removeClass("green").addClass("grey lighten-3").find("i").removeClass("white-text").addClass("grey-text");
+    		joinEvent();
+    	} else leaveEvent();
     });
+
+    function leaveEvent(){
+    	var progressOverlay = $("<div id='progress-overlay' style='width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: rgba(0,0,0,0.7); display: none;'></div>");
+    	var progressIndicator = $("<div id='progressbar' style='position: absolute;' class='preloader-wrapper big'>" +
+    								"<div class='spinner-layer spinner-blue-only'>" +
+      									"<div class='circle-clipper left'>" +
+        									"<div class='circle'></div>" +
+     									"</div>" +
+     									"<div class='gap-patch'>" +
+       										"<div class='circle'></div>" +
+      									"</div>" +
+      									"<div class='circle-clipper right'>" +
+        									"<div class='circle'></div>" +
+      									"</div>" +
+    								"</div>" +
+  								"</div>");
+    	progressOverlay.append(progressIndicator);
+    	$("body").append(progressOverlay);
+    	progressOverlay.fadeIn(400, function(){
+    		$("#progressbar").css({
+    			left: $(window).width() / 2 - parseInt($("#progressbar").css("width").replace("px", "")),
+    			top: $(window).height() / 2 - parseInt($("#progressbar").css("height").replace("px", ""))
+    		}).addClass("active");
+    		$.ajax({
+	    		url: "/event/leave",
+	    		type: "post",
+	    		dataType: "json",
+	    		data: "event_id=<%= @event[:id] %>",
+	    		success: function(data){
+	    			progressOverlay.fadeOut(400, function(){
+	    				progressOverlay.remove();
+	    			});
+	    			if(data.status == 0){
+	    				toast("You left the event", 5000, "green");
+	    				$("#action-join")
+	    					.removeClass("green")
+	    					.addClass("grey lighten-3")
+	    					.find("i")
+	    					.removeClass("white-text")
+	    					.addClass("grey-text")
+	    					.attr("data-tooltip", "Join event");
+	    			} else if(data.status == 1){
+	    				toast("You have to join the event first before you can leave", 5000, "orange");
+	    			} else if(data.status == 2){
+	    				toast("You must be logged in to leave this event", 5000, "red");
+	    			}
+	    		},
+	    		error: function(){
+	    			progressOverlay.fadeOut(400, function(){
+	    				progressOverlay.remove();
+	    			});
+	    			toast("An unknown error was encountered while trying to leave the event");
+	    		}
+	    	});
+    	});
+    }
+
+    function joinEvent(){
+    	var progressOverlay = $("<div id='progress-overlay' style='width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: rgba(0,0,0,0.7); display: none;'></div>");
+    	var progressIndicator = $("<div id='progressbar' style='position: absolute;' class='preloader-wrapper big'>" +
+    								"<div class='spinner-layer spinner-blue-only'>" +
+      									"<div class='circle-clipper left'>" +
+        									"<div class='circle'></div>" +
+     									"</div>" +
+     									"<div class='gap-patch'>" +
+       										"<div class='circle'></div>" +
+      									"</div>" +
+      									"<div class='circle-clipper right'>" +
+        									"<div class='circle'></div>" +
+      									"</div>" +
+    								"</div>" +
+  								"</div>");
+    	progressOverlay.append(progressIndicator);
+    	$("body").append(progressOverlay);
+    	progressOverlay.fadeIn(400, function(){
+    		$("#progressbar").css({
+    			left: $(window).width() / 2 - parseInt($("#progressbar").css("width").replace("px", "")),
+    			top: $(window).height() / 2 - parseInt($("#progressbar").css("height").replace("px", ""))
+    		}).addClass("active");
+    		$.ajax({
+	    		url: "/event/join",
+	    		type: "post",
+	    		dataType: "json",
+	    		data: "event_id=<%= @event[:id] %>",
+	    		success: function(data){
+	    			progressOverlay.fadeOut(400, function(){
+	    				progressOverlay.remove();
+	    			});
+	    			if(data.status == 0){
+	    				toast("You joined the event", 5000, "green");
+	    				$("#action-join")
+	    					.removeClass("grey lighten-3")
+	    					.addClass("green").find("i")
+	    					.removeClass("grey-text")
+	    					.addClass("white-text")
+	    					.attr("data-tooltip", "Leave event");
+	    			} else if(data.status == 1){
+	    				toast("You are already joining this event", 5000, "orange");
+	    			} else if(data.status == 2){
+	    				toast("You must be logged in to join this event", 5000, "red");
+	    			} else if(data.status == 3){
+	    				toast("The event you are trying to join does not exist", 5000, "red");
+	    			} else if(data.status == 4){
+	    				toast("You cannot join this event anymore because it is already finished", 5000, "red");
+	    			}
+	    		},
+	    		error: function(){
+	    			progressOverlay.fadeOut(400, function(){
+	    				progressOverlay.remove();
+	    			});
+	    			toast("An unknown error was encountered while trying to join the event");
+	    		}
+	    	});
+    	});
+    }
     $(".tooltipped").tooltip({
     	delay: 50
     });
-    var latlng = new google.maps.LatLng(<%= @event[:lat] %>, <%= @event[:lng] %>);
-    var mapOptions = {
-        zoom: 15,
-        center: latlng,
-        mapTypeId: 'roadmap'
-    }
-    var marker = new google.maps.Marker({
-        position: latlng,
-        title: "sample location"
-    });
-    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    marker.setMap(map);
+    if(google.maps){
+	   
+	    var latlng = new google.maps.LatLng(14.5746745, 120.9890185);
+	    var mapOptions = {
+	        zoom: 15,
+	        center: latlng,
+	        mapTypeId: 'roadmap'
+	    }
+	    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+	    if(<%= @event[:lat] %> != -1){ 
+	    	latlng = new google.maps.LatLng(<%= @event[:lat] %>, <%= @event[:lng] %>);
+	    	placeMarker(latlng);
+	    	map.setCenter(latlng);
+	    }
+	}
+	function placeMarker(location) {
+	if(typeof currentPoint !== "undefined")
+		currentPoint.setMap(null);
+	  var marker = new google.maps.Marker({
+	    position: location,
+	    map: map,
+	  });
+	  currentPoint = marker;
+	  $("#map_lat").val(location.lat())
+	  $("#map_lng").val(location.lng());
+}
 });
 </script>

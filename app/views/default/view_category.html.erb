@@ -1,0 +1,40 @@
+<% content_for :title, @category[:name] %>
+<div  style="background-image: url('<%= @category[:photo] %>'); background-size: cover; background-attachment: fixed; height: 350px; width: 100%;">
+	<div class="container">
+		<h1 style="font-size: 15rem; line-height: 350px; margin-top: 0; color: rgba(0,0,0,0.5);"><%= @category[:name] %></h1>
+	</div>
+</div>
+<div class="container">
+	<div class="section">
+		<div class="row" style="min-height: 500px;">
+		<% if @category[:events].size > 0 %>
+			<% @category[:events].each do |event| %>
+				<div class="col l4 m6 s12">
+					<div class="card medium">
+				        <div class="card-image waves-effect waves-block waves-light">
+				          <a href='<%= event[:link] %>' target='_blank'><img src="<%= event[:photo] %>"></a>
+				        </div>
+				        <div class="card-content">
+				          <span class="card-title grey-text text-darken-4" style='font-size: 1.3rem;'><a target="_blank" style="text-transform: none;" href="<%= event[:link] %>" class="grey-text text-darken-4"><%= event[:title] %></a><i style="cursor: pointer" class="activator mdi-navigation-more-vert right"></i></span>
+				          <p><%= event[:date] %></p>
+				        </div>
+				        <div class="card-reveal">
+				          <span class="card-title grey-text text-darken-4"><%= event[:title] %> <i class="mdi-navigation-close right"></i></span>
+				          <p><%= event[:description] %></p>
+				        </div>
+				    </div>
+				</div>
+			<% end %>
+		<% else %>
+			<div class="valign-wrapper" style="width: 100%; height: 500px;">
+				<h3 class="center-align grey-text text-lighten-1" style="width: 100%;">There are no events yet</h3>
+			</div>
+		<% end %>
+		</div>
+	</div>
+</div>
+<% if @user.present? %>
+	<%= link_to event_edit_path, class: "btn-floating btn-large waves-effect blue", style: "position:fixed; right: 70px; bottom: 30px; z-index:999" do %>
+		<i class="mdi-content-create"></i>
+	<% end %>
+<% end %>

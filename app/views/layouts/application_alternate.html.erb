@@ -36,27 +36,39 @@
 					<%= form_tag(logout_path, id: "logout-form", class: "no-display") do %>
 					<% end %>
 				<% else %>
-					<li class="icon-links white">
-						<a href="">
-							<%= image_tag("help.png", style: "width: 25px; margin-botom: 10px;") %>
-						</a></li>
 					<li class="page_item white">
 						<a class="modal-trigger" href="#login-modal">
 							<span>Login</span>
 						</a>
 					</li>
 					<li class="page_item white">
-						<a href="register.html">
-							<span>Register</span>
-						</a>
-					</li>
-					<li class="page_item white">
-						<a href="">
-							<span>Contact Us</span>
-						</a>
+						<%= link_to "Register", register_path %>
 					</li>
 				<% end %>
 			</ul>
+
+			<!-- Login Modal -->
+			<div id="login-modal" class="modal">
+				<div class="modal-content">
+					<h5 class="grey-text text-darken-3">Log in</h5>
+					<div class="divider"></div>
+					<%= form_tag(login_path, id: "login-form") do %>
+						<div class="row">
+							<div class="col s12">
+								<label for="username_login">Username or email</label>
+								<input id="username_login" name="username_login" class="grey-text text-darken-3" type="text"> 
+							</div>
+							<div class="col s12">
+								<label for="opassword_login">Password</label>
+								<input id="opassword_login" name="opassword_login" class="grey-text text-darken-3" type="password"> 
+							</div>
+						</div>
+						<a id="login-submit" href="#"
+							class="waves-effect waves-green btn modal-action right">Log
+							in</a>
+					<% end %>
+				</div>
+			</div>
 			<ul class="side-nav" id="side-nav" style="overflow: auto;">
 				<li style="display: block; background-color: white; border-bottom: 1px solid #CCCCCC">
 					<%= link_to root_path, style: "padding: 25px 0; position:relative; top: 50%; left: 50%; transform:translate(-50%);" do %>
@@ -83,25 +95,22 @@
 		<div class="container">
 			<div class="row">
 				<div class="col l6 s12">
-					<h5 class="white-text">Footer Content</h5>
-					<p class="grey-text text-lighten-4">You can use rows and
-						columns here to organize your footer content.</p>
+					<h5 class="white-text">HealthKit</h5>
+					<p class="grey-text text-lighten-4">Lance Alcabasa - BEST PROF EVER</p>
 				</div>
 				<div class="col l4 offset-l2 s12">
-					<h5 class="white-text">Links</h5>
+					<h5 class="white-text">Developers</h5>
 					<ul>
-						<li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-						<li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-						<li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-						<li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+						<li><a class="grey-text text-lighten-3" href="#!">Andrea Ver</a></li>
+						<li><a class="grey-text text-lighten-3" href="#!">Ken Asanion</a></li>
+						<li><a class="grey-text text-lighten-3" href="#!">Jr Aquino</a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 		<div class="footer-copyright">
 			<div class="container">
-				© 2015 Copyright Text <a class="grey-text text-lighten-4 right"
-					href="#!">More Links</a>
+				© 2015 Copyright 
 			</div>
 		</div>
 	</footer>
@@ -117,6 +126,46 @@
 		      belowOrigin: true
 		    }
 		  );
+		$("#login-submit").click(function(){
+			$("#login-form").submit();
+		})
+		$("#login-form").validate({
+			errorClass: "invalid",
+			validClass: "valid",
+			debug: true,
+			errorElement: "span",
+			rules:{
+				opassword_login: "required",
+				username_login: "required"
+			},
+			messages: {
+				opassword_login: "You must enter your password",
+				username_login:  "You must enter your username or email address"
+			},
+			submitHandler: function(form){
+				$.ajax({
+					url: $(form).attr("action"),
+					data: $(form).serialize(),
+					dataType: "json",
+					type: "post",
+					success: function(data, textStatus, jqXHR){
+						if(data.status == 1){
+							$("#opassword_login").addClass("invalid");
+							$("#username_login").addClass("invalid");
+							toast("Invalid username or password", 5000, "red");
+						} else{
+							location.assign("<%= root_path %>");
+						}
+					},
+					error: function(jqXHR, textStatus, errorThrown){
+						console.log(textStatus);
+						toast("An unknown problem was encountered while trying to sign up", 5000, "orange");
+					},
+					complete: function(){
+					}
+				});
+			}
+		})
 	});
 </script>
 </body>
